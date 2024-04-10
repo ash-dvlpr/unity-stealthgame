@@ -1,5 +1,14 @@
 {
   "dependencies": {
+    "com.ash-dvlpr.cinder-utils": {
+      "version": "https://github.com/ash-dvlpr/cinder-utils.git#v1.1.0",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.coffee.upm-git-extension": "git://github.com/mob-sakai/UpmGitExtension.git"
+      },
+      "hash": "b393eaab707d0e2718c78e4a186c9fcf81e7de91"
+    },
     "com.coffee.upm-git-extension": {
       "version": "https://github.com/mob-sakai/UpmGitExtension.git",
       "depth": 0,
