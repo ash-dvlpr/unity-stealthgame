@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using CinderUtils.Events;
+
+
 public class Coin : Collectible {
-    protected override void Collect(Collider other) {
-        Debug.Log("Coin Collected");
-        /** TODO: Send a GameEvent 
-         * Handle event on the GameManager to decrease the coin count.
-         */
+
+    // ===================== Unity Stuff =====================
+    void OnEnable() {
+        EventBus.Raise<GameplayEvent>(new() { id = ID, kind = EventKind.SETUP });
     }
 
-    void OnEnable() {
-        // TODO: Increase global coint count.
+    // ===================== Custom Code =====================
+    protected override void Collect(Collider other) {
+        EventBus.Raise<GameplayEvent>(new() { id = ID, kind = EventKind.OBJECTIVE });
     }
 }
