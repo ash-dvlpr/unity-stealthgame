@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 using CinderUtils.Events;
 using CinderUtils.Attributes;
-
+using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public enum GameState : byte {
     NONE            = 0,
@@ -20,15 +20,19 @@ public class Gameplay : MonoBehaviour {
     // ==================== Configuration ====================
     [field: SerializeField] public GameplayConfig Config { get; private set; }
 
+    [Header("Player")]
+    [SerializeField] public PlayerInput player;
+
     // ====================== Variables ======================
     public HashSet<int> objectiveIds = new();
     int remainingObjectives = 0;
+    
+    [Header("Game State")]
     [Disabled, SerializeField] float remainingTime = 0f;
     GameState gameState;
 
     public int TotalObjectives { get => objectiveIds.Count; }
     public int RemainingObjectives { get => remainingObjectives; }
-    public bool TimerStarted { get => gameState != GameState.NONE; }
 
     // ===================== Unity Stuff =====================
     void Awake() {
@@ -45,16 +49,29 @@ public class Gameplay : MonoBehaviour {
     }
 
     void Start() {
-        Restart();
+        RestartState();
     }
 
     void Update() {
-        if (!TimerStarted) {
-            if (Input.anyKeyDown) gameState = GameState.GAME_STARTED;
-        }
-        else if (gameState == GameState.GAME_STARTED) {
-            remainingTime -= Time.deltaTime;
-            CheckWinCondition();
+        switch (gameState) {
+            case GameState.NONE: {
+                if (Input.GetKeyDown(KeyCode.Return)) {
+                    gameState = GameState.GAME_STARTED;
+                    player.enabled = true;
+                }
+                break;
+            } 
+            case GameState.GAME_ENDED: {
+                if (Input.GetKeyDown(KeyCode.Return)) {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                }
+                break;
+            } 
+            case GameState.GAME_STARTED: { 
+                remainingTime -= Time.deltaTime;
+                CheckWinCondition();
+                break;
+            } 
         }
     }
     // ===================== Custom Code =====================
@@ -63,23 +80,25 @@ public class Gameplay : MonoBehaviour {
         remainingTime = Config.MaxTime;
     }
 
-    void Restart() {
+    void RestartState() {
         gameState = GameState.NONE;
         remainingObjectives = TotalObjectives;
+        player.enabled = false;
     }
 
     void OnGameplayEvent(GameplayEvent e) {
-        if (e.kind == EventKind.NONE) return;
-
         // Do event specific logic
-        switch (e.kind) {
+        switch (e.data) {
+            case EventMetadata.NONE: return;
+
             // Register Objectives
-            case EventKind.SETUP: {
+            case EventMetadata.SETUP: {
                 objectiveIds.Add(e.id);
                 break;
             }
 
-            case EventKind.OBJECTIVE: {
+            // Objective advanced
+            case EventMetadata.OBJECTIVE: {
                 if (objectiveIds.Contains(e.id)) {
                     remainingObjectives--;
                 }
@@ -91,18 +110,24 @@ public class Gameplay : MonoBehaviour {
     }
 
     void CheckWinCondition() {
+        //Debug.Log($"{RemainingObjectives}/{TotalObjectives}");
         if (RemainingObjectives == 0) TriggerWin();
         else if (remainingTime <= float.Epsilon) TriggerDefeat();
     }
 
     void TriggerWin() {
+        Debug.Log("VICTORY!");
         gameState = GameState.GAME_ENDED;
-        Debug.Log("WIN!");
+        player.enabled = false;
+
+        // Trigger win fireworks
+        EventBus.Raise<CinematicEvent>(new() { id = CinematicID.VICTORY });
     }
 
     void TriggerDefeat() {
-        gameState = GameState.GAME_ENDED;
         Debug.Log("DEFEAT!");
+        gameState = GameState.GAME_ENDED;
+        player.enabled = false;
 
         // TODO: Reload Scene
     }

@@ -9,11 +9,11 @@ public class Coin : Collectible {
 
     // ===================== Unity Stuff =====================
     void OnEnable() {
-        EventBus.Raise<GameplayEvent>(new() { id = ID, kind = EventKind.SETUP });
+        EventBus.Raise<GameplayEvent>(new() { id = ID, data = EventMetadata.SETUP });
     }
 
     // ===================== Custom Code =====================
     protected override void Collect(Collider other) {
-        EventBus.Raise<GameplayEvent>(new() { id = ID, kind = EventKind.OBJECTIVE });
+        EventBus.Raise<GameplayEvent>(new() { id = ID, data = EventMetadata.OBJECTIVE });
     }
 }

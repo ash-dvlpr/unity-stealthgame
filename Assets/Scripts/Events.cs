@@ -7,12 +7,24 @@ using CinderUtils.Events;
 
 public struct GameplayEvent : IEvent {
     public int id;
-    public EventKind kind;
+    public EventMetadata data;
 }
 
-public enum EventKind : byte {
+public enum EventMetadata : byte {
     NONE        = 0,
     SETUP       = 1,
     OBJECTIVE   = 2,
     COLLECTIBLE = 3,
+    TRIGGER     = 4,
+}
+
+
+public struct CinematicEvent : IEvent {
+    public CinematicID id;
+}
+
+public enum CinematicID : byte { 
+    NONE        = 0,
+    VICTORY     = 1,
+    DEFEAT      = 2,
 }
