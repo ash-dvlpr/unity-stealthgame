@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.ash-dvlpr.cinder-utils": "https://github.com/ash-dvlpr/cinder-utils.git#v1.1.0",
+    "com.ash-dvlpr.cinder-utils": "https://github.com/ash-dvlpr/cinder-utils.git#v1.1.1",
     "com.coffee.upm-git-extension": "https://github.com/mob-sakai/UpmGitExtension.git",
     "com.unity.cinemachine": "2.10.0",
     "com.unity.collab-proxy": "2.3.1",
