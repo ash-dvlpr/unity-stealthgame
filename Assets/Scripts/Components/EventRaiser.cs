@@ -14,7 +14,6 @@ public abstract class EventRaiser : MonoBehaviour {
 
     // ===================== Unity Stuff =====================
     protected virtual void Awake() {
-        Debug.Log("EventRaiser.Awake()");
         // Set the id of the collectible. Using an atomic operation to avoid issues.
         id = Interlocked.Increment(ref nextId);    
     }

@@ -5,15 +5,12 @@ using UnityEngine;
 using CinderUtils.Events;
 
 
-public abstract class CinematicEntity : EventRaiser {
+public abstract class CinematicEntity : MonoBehaviour {
     // ======================= Events ========================
     EventBinding<CinematicEvent> gameplayEvents = new();
 
     // ===================== Unity Stuff =====================
-    protected override void Awake() {
-        base.Awake();
-
-        Debug.Log("CinematicEntity.Awake()");
+    protected virtual void Awake() {
         gameplayEvents.OnEvent += OnCinematicEvent;
     }
 
