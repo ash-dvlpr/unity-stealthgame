@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 using CinderUtils.Extensions;
+using UnityEngine.UIElements;
 
 
 public class AIPatrol : MonoBehaviour, IEnumerable<Transform> {
@@ -20,7 +21,9 @@ public class AIPatrol : MonoBehaviour, IEnumerable<Transform> {
 
     // ===================== Custom Code =====================
     public IEnumerator<Transform> GetEnumerator() {
-        return patrolPoints.GetEnumerator();
+        foreach (Transform t in patrolPoints) {
+            yield return t;
+        }
     }
 
     IEnumerator IEnumerable.GetEnumerator() {

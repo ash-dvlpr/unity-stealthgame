@@ -6,10 +6,10 @@ public abstract class BaseState<EState> where EState : Enum {
     public abstract EState Key { get; }
 
     // ===================== Custom Code =====================
-    public abstract void Enter();
-    public abstract void Exit();
-    public abstract void Tick();
-    public abstract void FixedTick();
+    public virtual void Enter() {}
+    public virtual void Exit() {}
+    public virtual void Tick() {}
+    public virtual void FixedTick() { }
     public abstract EState NextState();
 
 }

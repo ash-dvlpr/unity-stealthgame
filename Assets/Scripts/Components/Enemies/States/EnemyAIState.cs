@@ -4,9 +4,9 @@ using UnityEngine;
 
 public abstract class EnemyAIState : BaseState<EnemyAI.EState> {
     protected EnemyAIState(EnemyAI context) {
-        this.context = context;
+        this.Context = context;
     }
 
     // ====================== Variables ======================
-    protected EnemyAI context;
+    protected EnemyAI Context { get; private set; }
 }

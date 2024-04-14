@@ -4237,7 +4237,7 @@ MonoBehaviour:
     m_Bits: 4294967295
   m_UseGeometry: 1
   m_DefaultArea: 0
-  m_GenerateLinks: 1
+  m_GenerateLinks: 0
   m_IgnoreNavMeshAgent: 1
   m_IgnoreNavMeshObstacle: 1
   m_OverrideTileSize: 0
@@ -4612,6 +4612,17 @@ PrefabInstance:
     - target: {fileID: 4822652859342757205, guid: 598fd52469bfbbd4abad0da67f307a03,
         type: 3}
       propertyPath: patrol
+      value: 
+      objectReference: {fileID: 1866190403}
+    - target: {fileID: 4822652859342757205, guid: 598fd52469bfbbd4abad0da67f307a03,
+        type: 3}
+      propertyPath: <Config>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 570d31930832988469ad403450c6f537,
+        type: 2}
+    - target: {fileID: 4822652859342757205, guid: 598fd52469bfbbd4abad0da67f307a03,
+        type: 3}
+      propertyPath: <Patrol>k__BackingField
       value: 
       objectReference: {fileID: 1866190403}
     m_RemovedComponents: []

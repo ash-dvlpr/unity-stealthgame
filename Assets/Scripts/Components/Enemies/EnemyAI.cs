@@ -17,7 +17,7 @@ public class EnemyAI : BaseStateMachine<EnemyAI.EState> {
 
     // ======================= Context =======================
     [field: SerializeField] public Transform CurrentTarget { get; set; } = null;
-    [field: SerializeField] public NavMeshAgent Agent { get; private set; }
+    public NavMeshAgent Agent { get; private set; }
 
     // ===================== Unity Stuff =====================
     protected override void Awake() {

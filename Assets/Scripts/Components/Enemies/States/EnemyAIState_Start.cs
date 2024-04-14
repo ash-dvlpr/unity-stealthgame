@@ -10,11 +10,7 @@ public class EnemyAIState_Start : EnemyAIState {
     public EnemyAIState_Start(EnemyAI context) : base(context) { }
 
     // ===================== Custom Code =====================
-    public override void Enter() { }
-    public override void Exit() { }
-    public override void Tick() { }
-    public override void FixedTick() { }
     public override EnemyAI.EState NextState() { 
-        return Key; 
+        return EnemyAI.EState.PATROL; 
     }
 }
