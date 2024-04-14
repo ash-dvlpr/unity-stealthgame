@@ -19315,7 +19315,7 @@ GameObject:
   - component: {fileID: 9170206318686565780}
   - component: {fileID: 7181796696388790530}
   m_Layer: 0
-  m_Name: VictoryFireworks
+  m_Name: P_VictoryFireworks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
