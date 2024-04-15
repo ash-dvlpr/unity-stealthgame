@@ -15,11 +15,15 @@ public class FieldOfView : MonoBehaviour {
     // ==================== Configuration ====================
     [field: SerializeField, Range(0, 360)] public float ViewAngle { get; private set; }
     [field: SerializeField, Min(0)] public float Range { get; private set; }
+    [field: SerializeField] public EDetectionMode DetectionMode { get; set; }
+    [SerializeField, Min(0)] float eyeOffset;
     [SerializeField] LayerMask targetMask;
     [SerializeField] LayerMask obstructionMask;
-    [SerializeField] EDetectionMode detectionMode;
 
     // ====================== Variables ======================
+    public Vector3 EyeOffset => new Vector3(0, eyeOffset, 0);
+    public Vector3 EyePosition => transform.position + EyeOffset;
+
     public bool SeenAny => !VisibleTargets.NullOrEmpty();
     public readonly List<Transform> VisibleTargets = new();
 
@@ -47,7 +51,7 @@ public class FieldOfView : MonoBehaviour {
         VisibleTargets.Clear();
 
         // Get all target objects in a sphere arround the character
-        Collider[] targetsInRange = Physics.OverlapSphere(transform.position, Range, targetMask);
+        Collider[] targetsInRange = Physics.OverlapSphere(EyePosition, Range, targetMask);
 
         // If there are any targets in range
         foreach (Collider targetCollider in targetsInRange) {
@@ -62,9 +66,9 @@ public class FieldOfView : MonoBehaviour {
 
     private bool TargetIsVisible(Transform target) {
         // Precalculate the displacement (b-a) to the target, which also encodes direction.
-        Vector3 displacementToTarget = (target.position - transform.position);
+        Vector3 displacementToTarget = (target.position - EyePosition);
 
-        switch (detectionMode) {
+        switch (DetectionMode) {
             case EDetectionMode.STRICT: return IsInViewCone(displacementToTarget) && HasLineOfSight(displacementToTarget);
             case EDetectionMode.LOOSE: return IsInViewCone(displacementToTarget);
             default: return false;
@@ -83,6 +87,6 @@ public class FieldOfView : MonoBehaviour {
         float distanceToTarget = displacementToTarget.magnitude;
 
         // If the LineOfSight is not broken by obstacles, we have line of sight with the target.
-        return !Physics.Raycast(transform.position, displacementToTarget.normalized, distanceToTarget, obstructionMask);
+        return !Physics.Raycast(EyePosition, displacementToTarget.normalized, distanceToTarget, obstructionMask);
     }
 }

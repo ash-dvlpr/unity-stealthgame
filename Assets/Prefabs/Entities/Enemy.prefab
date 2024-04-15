@@ -71,6 +71,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ViewAngle>k__BackingField: 90
   <Range>k__BackingField: 8
+  <DetectionMode>k__BackingField: 0
+  eyeOffset: 1.68
   targetMask:
     serializedVersion: 2
     m_Bits: 128
@@ -90,9 +92,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <Patrol>k__BackingField: {fileID: 0}
-  <Config>k__BackingField: {fileID: 11400000, guid: 570d31930832988469ad403450c6f537,
+  <Config>k__BackingField: {fileID: 11400000, guid: a0d4bdd31d8e4214488a6665a8a99c4e,
     type: 2}
-  <CurrentTarget>k__BackingField: {fileID: 0}
 --- !u!1001 &1356186458582932832
 PrefabInstance:
   m_ObjectHideFlags: 0

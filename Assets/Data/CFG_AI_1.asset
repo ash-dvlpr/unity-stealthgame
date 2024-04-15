@@ -9,8 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f085dddf004e48c43a7d2e299e12b7d6, type: 3}
-  m_Name: AIConfig_1
+  m_Script: {fileID: 11500000, guid: 2010b39f25a63a24da555984e7a4aaa5, type: 3}
+  m_Name: CFG_AI_1
   m_EditorClassIdentifier: 
-  <WalkSpeed>k__BackingField: 1
-  <RunSpeed>k__BackingField: 2
+  configs:
+  - key: 0
+    WalkSpeed: 0
+  - key: 1
+    WalkSpeed: 2
+  - key: 2
+    WalkSpeed: 4
+  - key: 3
+    WalkSpeed: 2

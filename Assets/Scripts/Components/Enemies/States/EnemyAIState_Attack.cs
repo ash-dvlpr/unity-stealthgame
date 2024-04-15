@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAIState_Atack : EnemyAIState {
+public class EnemyAIState_Attack : EnemyAIState {
     // ====================== Variables ======================
-    public override EnemyAI.EState Key => EnemyAI.EState.ATACK;
+    public override EnemyAI.EState Key => EnemyAI.EState.ATTACK;
 
     // ===================== Constructor =====================
-    public EnemyAIState_Atack(EnemyAI context) : base(context) { }
+    public EnemyAIState_Attack(EnemyAI context) : base(context) { }
 
     // ===================== Custom Code =====================
     public override void Enter() { }
