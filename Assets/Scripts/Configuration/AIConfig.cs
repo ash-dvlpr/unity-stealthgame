@@ -1,18 +1,18 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Rendering;
+
 
 [CreateAssetMenu(fileName = "CFG_AI", menuName = "Configuration/EnemyAI Config", order = 2)]
 public class AIConfig : ScriptableObject {
     // ==================== Configurations ===================
     [Serializable]
     public struct StateConfig {
-        [SerializeField] internal EnemyAI.EState key;
+        [SerializeField] internal EnemyAI.EState State;
+        [SerializeField] public FieldOfView.EDetectionMode DetectionMode;
         [SerializeField] public float WalkSpeed;
-        [SerializeField] public FieldOfView.EDetectionMode SightMode;
+        [SerializeField] public float StoppingDistance;
 
         public override string ToString() {
             return JsonUtility.ToJson(this);
@@ -20,21 +20,23 @@ public class AIConfig : ScriptableObject {
     }
 
     [SerializeField] List<StateConfig> configs;
+    [field: SerializeField] public float AttackDelay { get; private set; }
+    [field: SerializeField] public float AttackDamage { get; private set; }
 
     // ====================== Variables ======================
-    [DoNotSerialize] internal Dictionary<EnemyAI.EState, StateConfig> _configs;
-    [DoNotSerialize] internal Dictionary<EnemyAI.EState, StateConfig> Configs {
+    [System.NonSerialized] internal Dictionary<EnemyAI.EState, StateConfig> _configsDict;
+    internal Dictionary<EnemyAI.EState, StateConfig> ConfigsDict {
         get {
-            if (_configs == null) {
-                _configs = new();
+            if (_configsDict == null) {
+                _configsDict = new();
                 foreach (StateConfig config in configs) {
-                    _configs[config.key] = config;
+                    _configsDict[config.State] = config;
                 }
             }
-            return _configs;
+            return _configsDict;
         }
     }
     public StateConfig this[EnemyAI.EState key] {
-        get { return Configs[key]; }
+        get { return ConfigsDict[key]; }
     }
 }

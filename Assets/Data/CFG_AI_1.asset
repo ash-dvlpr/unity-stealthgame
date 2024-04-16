@@ -13,11 +13,21 @@ MonoBehaviour:
   m_Name: CFG_AI_1
   m_EditorClassIdentifier: 
   configs:
-  - key: 0
+  - State: 0
+    DetectionMode: 0
     WalkSpeed: 0
-  - key: 1
+    StoppingDistance: 0
+  - State: 1
+    DetectionMode: 0
     WalkSpeed: 2
-  - key: 2
+    StoppingDistance: 0
+  - State: 2
+    DetectionMode: 0
     WalkSpeed: 4
-  - key: 3
-    WalkSpeed: 2
+    StoppingDistance: 1
+  - State: 3
+    DetectionMode: 0
+    WalkSpeed: 0
+    StoppingDistance: 4
+  <AttackDelay>k__BackingField: 1
+  <AttackDamage>k__BackingField: 1

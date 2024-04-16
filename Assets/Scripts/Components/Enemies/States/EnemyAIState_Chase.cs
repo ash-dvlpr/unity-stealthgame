@@ -12,16 +12,25 @@ public class EnemyAIState_Chase : EnemyAIState {
 
     // ===================== Custom Code =====================
     public override void Enter() {
-        CurrentTarget = Context.FOV.VisibleTargets.First();
+        base.Enter();
+        if (Context.FOV.SeenAny) { 
+            CurrentTarget = Context.FOV.VisibleTargets.First();
+        }
     }
-    public override void Exit() { }
+
     public override void Tick() {
         UpdateNavMeshAgent();
     }
-    public override void FixedTick() { }
+
     public override EnemyAI.EState NextState() {
-        if (!Context.FOV.SeenAny) {
+        // If target was lost
+        if (!Context.FOV.VisibleTargets.Contains(CurrentTarget)) {
             return EnemyAI.EState.PATROL;
+        }
+
+        // If the target enters the atack range
+        else if (DistanceToTarget <= StateConfig.StoppingDistance) {
+            return EnemyAI.EState.ATTACK;
         }
 
         return Key; 

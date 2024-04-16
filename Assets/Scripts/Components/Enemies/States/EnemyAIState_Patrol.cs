@@ -13,11 +13,17 @@ public class EnemyAIState_Patrol : EnemyAIState {
 
     // ===================== Custom Code =====================
     public override void Enter() {
+        base.Enter();
+
+        Context.OnPatrolChanged += OnPatrolChanged;
+        
         RestartSequence();
         CyclePatrol();
     }
     public override void Exit() {
         CurrentTarget = Context.transform;
+
+        Context.OnPatrolChanged -= OnPatrolChanged;
 
         sequence.Dispose();
         sequence = null;
@@ -28,6 +34,11 @@ public class EnemyAIState_Patrol : EnemyAIState {
         if (ReachedCurrentTarget()) { 
             CyclePatrol();
         }
+    }
+
+    void OnPatrolChanged() { 
+        RestartSequence();
+        CyclePatrol();
     }
 
     void RestartSequence() {

@@ -11,6 +11,8 @@ public abstract class EnemyAIState : BaseState<EnemyAI.EState> {
 
     // ====================== Variables ======================
     protected EnemyAI Context { get; set; }
+    protected AIConfig.StateConfig StateConfig => Context.Config[Key];
+    protected AIConfig Config => Context.Config;
     protected Transform CurrentTarget {
         get => Context.CurrentTarget;
         set {
@@ -18,8 +20,12 @@ public abstract class EnemyAIState : BaseState<EnemyAI.EState> {
             UpdateNavMeshAgent();
         }
     }
+    protected float DistanceToTarget => Vector3.Distance(Context.transform.position, CurrentTarget.position);
 
     // ===================== Custom Code =====================
+    public override void Enter() {
+        ApplyConfig();
+    }
     protected bool ReachedCurrentTarget() { 
         // If we aren't waiting for the path to be calculated, we are moving
         if (!Context.Agent.pathPending) {
@@ -38,5 +44,11 @@ public abstract class EnemyAIState : BaseState<EnemyAI.EState> {
 
     protected void UpdateNavMeshAgent() { 
         Context.Agent.SetDestination(Context.CurrentTarget.position);
+    }
+    protected void ApplyConfig() {
+        Context.FOV.DetectionMode = StateConfig.DetectionMode;
+
+        Context.Agent.speed = StateConfig.WalkSpeed;
+        Context.Agent.stoppingDistance = StateConfig.StoppingDistance;
     }
 }

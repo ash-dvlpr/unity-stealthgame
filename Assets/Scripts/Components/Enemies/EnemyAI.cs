@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -36,5 +37,11 @@ public class EnemyAI : BaseStateMachine<EnemyAI.EState> {
         states[EState.ATTACK] = new EnemyAIState_Attack(this);
         
         ActiveState = states[EState.START];
+    }
+
+    public event Action OnPatrolChanged;
+    public void SwapPatrol(AIPatrol newPatrol) { 
+        Patrol = newPatrol;
+        OnPatrolChanged?.Invoke();
     }
 }

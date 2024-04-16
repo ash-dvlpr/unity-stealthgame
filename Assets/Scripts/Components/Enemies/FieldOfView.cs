@@ -19,8 +19,8 @@ public class FieldOfView : MonoBehaviour {
     [field: SerializeField, Min(0)] public float Range { get; private set; }
     [field: SerializeField, Min(0)] public float PresenceRange { get; private set; }
     [field: SerializeField] public EDetectionMode DetectionMode { get; set; }
-    [SerializeField] LayerMask targetMask;
-    [SerializeField] LayerMask obstructionMask;
+    [field: SerializeField] public LayerMask TargetMask { get; private set; }
+    [field: SerializeField] public LayerMask ObstacleMask { get; private set; }
 
     // ====================== Variables ======================
     public bool SeenAny => !VisibleTargets.NullOrEmpty();
@@ -53,8 +53,8 @@ public class FieldOfView : MonoBehaviour {
         VisibleTargets.Clear();
 
         // Get all target objects in a sphere arround the character
-        TargetsInPresenceRange = Physics.OverlapSphere(EyeTransform.position, PresenceRange, targetMask);
-        TargetsInRange = Physics.OverlapSphere(EyeTransform.position, Range, targetMask);
+        TargetsInPresenceRange = Physics.OverlapSphere(EyeTransform.position, PresenceRange, TargetMask);
+        TargetsInRange = Physics.OverlapSphere(EyeTransform.position, Range, TargetMask);
 
         // If there are any targets in range
         foreach (Collider targetCollider in TargetsInRange) {
@@ -95,6 +95,6 @@ public class FieldOfView : MonoBehaviour {
         float distanceToTarget = displacementToTarget.magnitude;
 
         // If the LineOfSight is not broken by obstacles, we have line of sight with the target.
-        return !Physics.Raycast(EyeTransform.position, displacementToTarget.normalized, distanceToTarget, obstructionMask);
+        return !Physics.Raycast(EyeTransform.position, displacementToTarget.normalized, distanceToTarget, ObstacleMask);
     }
 }
