@@ -24,22 +24,17 @@ public class EnemyAIState_Patrol : EnemyAIState {
     }
 
     public override void Tick() {
-        //? Go to the CurrentTarget if we are not there yet.
-        // If we aren't waiting for the path to be calculated, we are moving
-        if (!Context.Agent.pathPending) {
-            // If we are within a "step" of our target, we may be almost done
-            if (Context.Agent.remainingDistance <= Context.Agent.stoppingDistance) {
-                // We are done if: there's no path to the exact position of our destination, or we're stopped.
-                if (!Context.Agent.hasPath || Context.Agent.velocity.sqrMagnitude <= float.Epsilon) {
-                    CyclePatrol();
-                }
-            }
+        // If we reached the target, continue with our patrol.
+        if (ReachedCurrentTarget()) { 
+            CyclePatrol();
         }
     }
+
     void RestartSequence() {
         sequence?.Dispose();
         sequence = Context.Patrol.GetEnumerator();
     }
+
     void CyclePatrol() {
         if (!sequence.MoveNext()) {
             RestartSequence();
@@ -53,6 +48,9 @@ public class EnemyAIState_Patrol : EnemyAIState {
 
     public override EnemyAI.EState NextState() {
         // TODO: Try detect player to change states
+        if (Context.FOV.SeenAny) {
+            return EnemyAI.EState.CHASE;
+        }
 
         return Key;
     }
