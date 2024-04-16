@@ -17,7 +17,7 @@ public class EnemyAIState_Patrol : EnemyAIState {
         CyclePatrol();
     }
     public override void Exit() {
-        Context.CurrentTarget = Context.transform;
+        CurrentTarget = Context.transform;
 
         sequence.Dispose();
         sequence = null;
@@ -41,8 +41,7 @@ public class EnemyAIState_Patrol : EnemyAIState {
             CyclePatrol();
         }
         else {
-            Context.CurrentTarget = sequence.Current;
-            Context.Agent.SetDestination(Context.CurrentTarget.position);
+            CurrentTarget = sequence.Current;
         }
     }
 

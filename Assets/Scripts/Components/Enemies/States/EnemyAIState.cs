@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public abstract class EnemyAIState : BaseState<EnemyAI.EState> {
     protected EnemyAIState(EnemyAI context) {
@@ -8,7 +10,14 @@ public abstract class EnemyAIState : BaseState<EnemyAI.EState> {
     }
 
     // ====================== Variables ======================
-    protected EnemyAI Context { get; private set; }
+    protected EnemyAI Context { get; set; }
+    protected Transform CurrentTarget {
+        get => Context.CurrentTarget;
+        set {
+            Context.CurrentTarget = value;
+            UpdateNavMeshAgent();
+        }
+    }
 
     // ===================== Custom Code =====================
     protected bool ReachedCurrentTarget() { 
@@ -25,5 +34,9 @@ public abstract class EnemyAIState : BaseState<EnemyAI.EState> {
 
         // Otherwise no
         return false;
+    }
+
+    protected void UpdateNavMeshAgent() { 
+        Context.Agent.SetDestination(Context.CurrentTarget.position);
     }
 }

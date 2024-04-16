@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,19 +14,20 @@ public class FieldOfView : MonoBehaviour {
     }
 
     // ==================== Configuration ====================
+    [field: SerializeField] public Transform EyeTransform { get; private set; }
     [field: SerializeField, Range(0, 360)] public float ViewAngle { get; private set; }
     [field: SerializeField, Min(0)] public float Range { get; private set; }
+    [field: SerializeField, Min(0)] public float PresenceRange { get; private set; }
     [field: SerializeField] public EDetectionMode DetectionMode { get; set; }
-    [SerializeField, Min(0)] float eyeOffset;
     [SerializeField] LayerMask targetMask;
     [SerializeField] LayerMask obstructionMask;
 
     // ====================== Variables ======================
-    public Vector3 EyeOffset => new Vector3(0, eyeOffset, 0);
-    public Vector3 EyePosition => transform.position + EyeOffset;
-
     public bool SeenAny => !VisibleTargets.NullOrEmpty();
     public readonly List<Transform> VisibleTargets = new();
+
+    public Collider[] TargetsInPresenceRange { get; private set; }
+    public Collider[] TargetsInRange { get; private set; }
 
     // ===================== Unity Stuff =====================
     void OnEnable() {
@@ -51,22 +53,27 @@ public class FieldOfView : MonoBehaviour {
         VisibleTargets.Clear();
 
         // Get all target objects in a sphere arround the character
-        Collider[] targetsInRange = Physics.OverlapSphere(EyePosition, Range, targetMask);
+        TargetsInPresenceRange = Physics.OverlapSphere(EyeTransform.position, PresenceRange, targetMask);
+        TargetsInRange = Physics.OverlapSphere(EyeTransform.position, Range, targetMask);
 
         // If there are any targets in range
-        foreach (Collider targetCollider in targetsInRange) {
+        foreach (Collider targetCollider in TargetsInRange) {
             Transform target = targetCollider.transform;
 
+            // If it's on the presence range, add it to the list.
+            if (TargetsInPresenceRange.Contains(targetCollider)) {
+                VisibleTargets.Add(target);
+            }
             // If it's visible, add it to the list.
-            if (TargetIsVisible(target)) {
+            else if (TargetIsVisible(targetCollider.bounds.center)) {
                 VisibleTargets.Add(target);
             }
         }
     }
 
-    private bool TargetIsVisible(Transform target) {
+    private bool TargetIsVisible(Vector3 targetPosition) {
         // Precalculate the displacement (b-a) to the target, which also encodes direction.
-        Vector3 displacementToTarget = (target.position - EyePosition);
+        Vector3 displacementToTarget = (targetPosition - EyeTransform.position);
 
         switch (DetectionMode) {
             case EDetectionMode.STRICT: return IsInViewCone(displacementToTarget) && HasLineOfSight(displacementToTarget);
@@ -78,7 +85,8 @@ public class FieldOfView : MonoBehaviour {
     private bool IsInViewCone(Vector3 displacementToTarget) {
         // If the angle between the target and our direction is less than half the view angle:
         // Then the target is inside the view cone.
-        float angleToTarget = Vector3.Angle(transform.forward, displacementToTarget.normalized);
+
+        float angleToTarget = Vector3.Angle(EyeTransform.forward, displacementToTarget.normalized);
         return angleToTarget < ( ViewAngle / 2 );
     }
 
@@ -87,6 +95,6 @@ public class FieldOfView : MonoBehaviour {
         float distanceToTarget = displacementToTarget.magnitude;
 
         // If the LineOfSight is not broken by obstacles, we have line of sight with the target.
-        return !Physics.Raycast(EyePosition, displacementToTarget.normalized, distanceToTarget, obstructionMask);
+        return !Physics.Raycast(EyeTransform.position, displacementToTarget.normalized, distanceToTarget, obstructionMask);
     }
 }
