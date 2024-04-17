@@ -21,11 +21,7 @@ public class EnemyAIState_Attack : EnemyAIState {
 
     public override void Tick() {
         UpdateTimer();
-
-        if (timer <= 0f) {
-            DealAreaDamage();
-            ResetTimer();
-        }
+        DealAreaDamage();
     }
 
     void ResetTimer() {
@@ -34,7 +30,6 @@ public class EnemyAIState_Attack : EnemyAIState {
 
     private void UpdateTimer() {
         timer -= Time.deltaTime;
-        Debug.Log(timer);
     }
 
     void DealAreaDamage() {
@@ -43,16 +38,22 @@ public class EnemyAIState_Attack : EnemyAIState {
         );
 
         foreach (Collider hit in hittedTargets) {
-            Debug.Log($"Hit: {hit.name}");
+            if (hit.TryGetComponent<Health>(out var health)) {
+                health.Damage(Config.AttackDPS);
+                Debug.Log($"Hit: {health.name}");
+            }
         }
     }
 
     public override EnemyAI.EState NextState() {
-        // TODO: If target dies, PATROL
+        // If not on attack animation
+        if (timer <= 0f) { 
+            // TODO: If target dies, PATROL
 
-        // Distance becomes too great, return to chasing
-        if (DistanceToTarget > StateConfig.StoppingDistance) {
-            return EnemyAI.EState.CHASE;
+            // Distance becomes too great, return to chasing
+            if (DistanceToTarget > StateConfig.StoppingDistance) {
+                return EnemyAI.EState.CHASE;
+            }
         }
 
         return Key;

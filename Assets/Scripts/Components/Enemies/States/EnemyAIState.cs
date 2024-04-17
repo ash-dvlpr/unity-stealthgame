@@ -45,6 +45,7 @@ public abstract class EnemyAIState : BaseState<EnemyAI.EState> {
     protected void UpdateNavMeshAgent() { 
         Context.Agent.SetDestination(Context.CurrentTarget.position);
     }
+
     protected void ApplyConfig() {
         Context.FOV.DetectionMode = StateConfig.DetectionMode;
 

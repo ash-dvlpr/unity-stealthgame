@@ -72,7 +72,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <EyeTransform>k__BackingField: {fileID: 5430503181121686308}
   <ViewAngle>k__BackingField: 90
-  <Range>k__BackingField: 8
+  <Range>k__BackingField: 10
   <PresenceRange>k__BackingField: 0.75
   <DetectionMode>k__BackingField: 0
   <TargetMask>k__BackingField:

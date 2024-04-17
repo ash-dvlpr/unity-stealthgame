@@ -22,12 +22,12 @@ MonoBehaviour:
     WalkSpeed: 2
     StoppingDistance: 0
   - State: 2
-    DetectionMode: 0
+    DetectionMode: 1
     WalkSpeed: 4
-    StoppingDistance: 1
+    StoppingDistance: 2
   - State: 3
-    DetectionMode: 0
+    DetectionMode: 1
     WalkSpeed: 0
-    StoppingDistance: 4
+    StoppingDistance: 5
   <AttackDelay>k__BackingField: 1
-  <AttackDamage>k__BackingField: 1
+  <AttackDamage>k__BackingField: 3

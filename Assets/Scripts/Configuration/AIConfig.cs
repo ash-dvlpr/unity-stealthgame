@@ -22,6 +22,7 @@ public class AIConfig : ScriptableObject {
     [SerializeField] List<StateConfig> configs;
     [field: SerializeField] public float AttackDelay { get; private set; }
     [field: SerializeField] public float AttackDamage { get; private set; }
+    public float AttackDPS => AttackDamage * Time.deltaTime;
 
     // ====================== Variables ======================
     [System.NonSerialized] internal Dictionary<EnemyAI.EState, StateConfig> _configsDict;
