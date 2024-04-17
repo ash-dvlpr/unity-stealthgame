@@ -61,7 +61,7 @@ public class ResourceBar : MonoBehaviour {
             var percent = trackedResource.Amount / (float) trackedResource.Max;
             barSlider.value = percent;
             if (showValues && displayText.enabled) {
-                displayText.text = $"{trackedResource.Amount} / {trackedResource.Max}";
+                displayText.text = trackedResource.ValuesString;
             }
         }
     }

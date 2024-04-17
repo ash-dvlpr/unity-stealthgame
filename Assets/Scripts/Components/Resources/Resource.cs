@@ -43,6 +43,8 @@ public abstract class Resource : MonoBehaviour {
         }
     }
 
+    public virtual string ValuesString => $"{Amount:0.#} / {Max}";
+
 
     // ====================== Unity Code ======================
     void OnEnable() {
