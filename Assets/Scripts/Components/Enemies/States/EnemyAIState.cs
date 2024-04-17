@@ -26,6 +26,10 @@ public abstract class EnemyAIState : BaseState<EnemyAI.EState> {
     public override void Enter() {
         ApplyConfig();
     }
+    public override void Tick() {
+        UpdateAnimator();
+    }
+
     protected bool ReachedCurrentTarget() { 
         // If we aren't waiting for the path to be calculated, we are moving
         if (!Context.Agent.pathPending) {
@@ -44,6 +48,10 @@ public abstract class EnemyAIState : BaseState<EnemyAI.EState> {
 
     protected void UpdateNavMeshAgent() { 
         Context.Agent.SetDestination(Context.CurrentTarget.position);
+    }
+
+    protected void UpdateAnimator() {
+        Context.Animator.SetFloat("Speed", Context.Agent.velocity.magnitude);
     }
 
     protected void ApplyConfig() {

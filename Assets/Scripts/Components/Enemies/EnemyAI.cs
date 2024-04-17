@@ -18,6 +18,7 @@ public class EnemyAI : BaseStateMachine<EnemyAI.EState> {
 
     // ======================= Context =======================
     public Transform CurrentTarget { get; set; } = null;
+    public Animator Animator { get; private set; }
     public NavMeshAgent Agent { get; private set; }
     public FieldOfView FOV { get; private set; }
 
@@ -25,6 +26,7 @@ public class EnemyAI : BaseStateMachine<EnemyAI.EState> {
     protected override void Awake() {
         Agent = GetComponent<NavMeshAgent>();
         FOV = GetComponent<FieldOfView>();
+        Animator = GetComponentInChildren<Animator>();
 
         base.Awake();
     }

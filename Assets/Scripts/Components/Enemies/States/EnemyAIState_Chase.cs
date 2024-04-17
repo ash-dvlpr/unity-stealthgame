@@ -19,6 +19,8 @@ public class EnemyAIState_Chase : EnemyAIState {
     }
 
     public override void Tick() {
+        base.Tick();
+
         UpdateNavMeshAgent();
     }
 

@@ -30,6 +30,8 @@ public class EnemyAIState_Patrol : EnemyAIState {
     }
 
     public override void Tick() {
+        base.Tick();
+
         // If we reached the target, continue with our patrol.
         if (ReachedCurrentTarget()) { 
             CyclePatrol();

@@ -17,9 +17,16 @@ public class EnemyAIState_Attack : EnemyAIState {
         base.Enter();
 
         ResetTimer();
+        Context.Animator.SetBool("IsAttacking", true);
+    }
+
+    public override void Exit() {
+        Context.Animator.SetBool("IsAttacking", false);
     }
 
     public override void Tick() {
+        base.Tick();
+
         UpdateTimer();
         DealAreaDamage();
     }
