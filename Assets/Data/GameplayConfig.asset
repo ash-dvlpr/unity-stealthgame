@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: GameplayConfig
   m_EditorClassIdentifier: 
   <MaxTime>k__BackingField: 60
+  <MinutesPerDay>k__BackingField: 24
