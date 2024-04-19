@@ -11,6 +11,7 @@ public class DayNightCycle : MonoBehaviour {
 
     // ==================== Configuration ====================
     [field: SerializeField] public GameplayConfig Config { get; private set; }
+    [SerializeField] float startingMinute = 1;
     [SerializeField] float timeSpeed = 1f;
     [SerializeField] Light sunLight;
     [SerializeField] Light moonLight;
@@ -20,6 +21,7 @@ public class DayNightCycle : MonoBehaviour {
 
     // ===================== Unity Stuff =====================
     private void Awake() {
+        time = startingMinute * 60;
         sunLight.enabled = false;
         moonLight.enabled = false;
     }
