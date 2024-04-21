@@ -9,8 +9,9 @@ using CinderUtils.Extensions;
 
 public class FieldOfView : MonoBehaviour {
     public enum EDetectionMode : byte {
-        STRICT = 0,
-        LOOSE  = 1,
+        InLineOfSight = 0,
+        InViewCone    = 1,
+        InRange       = 2,
     }
 
     // ==================== Configuration ====================
@@ -76,8 +77,9 @@ public class FieldOfView : MonoBehaviour {
         Vector3 displacementToTarget = (targetPosition - EyeTransform.position);
 
         switch (DetectionMode) {
-            case EDetectionMode.STRICT: return IsInViewCone(displacementToTarget) && HasLineOfSight(displacementToTarget);
-            case EDetectionMode.LOOSE: return IsInViewCone(displacementToTarget);
+            case EDetectionMode.InRange: return true;
+            case EDetectionMode.InViewCone: return IsInViewCone(displacementToTarget);
+            case EDetectionMode.InLineOfSight: return IsInViewCone(displacementToTarget) && HasLineOfSight(displacementToTarget);
             default: return false;
         }
     }

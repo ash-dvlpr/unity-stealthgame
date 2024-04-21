@@ -1860,8 +1860,8 @@ GameObject:
   - component: {fileID: 735553543}
   - component: {fileID: 735553542}
   - component: {fileID: 735553544}
-  - component: {fileID: 735553545}
   - component: {fileID: 735553546}
+  - component: {fileID: 735553545}
   m_Layer: 0
   m_Name: SUN Light
   m_TagString: Untagged
@@ -2001,7 +2001,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_LensFlareData: {fileID: 11400000, guid: 1bb78d141d4bf254f803f66a1665a4c7, type: 2}
-  intensity: 0.5
+  intensity: 0.1
   maxAttenuationDistance: 100
   maxAttenuationScale: 100
   distanceAttenuationCurve:
@@ -2082,8 +2082,8 @@ MonoBehaviour:
   useBackgroundCloudOcclusion: 0
   sampleCount: 32
   occlusionOffset: 0.05
-  scale: 1
-  allowOffScreen: 1
+  scale: 0.54
+  allowOffScreen: 0
   volumetricCloudOcclusion: 0
   occlusionRemapCurve:
     <length>k__BackingField: 2
@@ -2095,21 +2095,21 @@ MonoBehaviour:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0
-        inSlope: 0
-        outSlope: 1
-        tangentMode: 0
+        value: 1
+        inSlope: -0.9998891
+        outSlope: -0.9998891
+        tangentMode: 34
         weightedMode: 0
         inWeight: 0
-        outWeight: 0
+        outWeight: 0.33333334
       - serializedVersion: 3
         time: 1
-        value: 1
-        inSlope: 1
-        outSlope: 0
-        tangentMode: 0
+        value: 0.00011094846
+        inSlope: -0.9998891
+        outSlope: -0.9998891
+        tangentMode: 34
         weightedMode: 0
-        inWeight: 0
+        inWeight: 0.33333334
         outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
@@ -3197,7 +3197,7 @@ PrefabInstance:
     - target: {fileID: 5423640092344241721, guid: c78f3f4675fd89e469309d25005696c3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 42.512253
+      value: 35.01
       objectReference: {fileID: 0}
     - target: {fileID: 5423640092344241721, guid: c78f3f4675fd89e469309d25005696c3,
         type: 3}
@@ -3207,7 +3207,7 @@ PrefabInstance:
     - target: {fileID: 5423640092344241721, guid: c78f3f4675fd89e469309d25005696c3,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.725696
+      value: -10.84
       objectReference: {fileID: 0}
     - target: {fileID: 5423640092344241721, guid: c78f3f4675fd89e469309d25005696c3,
         type: 3}
@@ -5692,7 +5692,7 @@ PrefabInstance:
     - target: {fileID: 5423640092344241721, guid: c78f3f4675fd89e469309d25005696c3,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 49.57225
+      value: 63.32
       objectReference: {fileID: 0}
     - target: {fileID: 5423640092344241721, guid: c78f3f4675fd89e469309d25005696c3,
         type: 3}
@@ -5702,7 +5702,7 @@ PrefabInstance:
     - target: {fileID: 5423640092344241721, guid: c78f3f4675fd89e469309d25005696c3,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10.725696
+      value: 2.12
       objectReference: {fileID: 0}
     - target: {fileID: 5423640092344241721, guid: c78f3f4675fd89e469309d25005696c3,
         type: 3}
