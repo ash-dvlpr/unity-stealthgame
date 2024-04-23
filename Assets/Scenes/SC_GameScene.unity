@@ -1857,7 +1857,7 @@ GameObject:
   - component: {fileID: 660117389}
   - component: {fileID: 660117388}
   m_Layer: 0
-  m_Name: Atmosphere
+  m_Name: Clouds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2067,8 +2067,8 @@ MonoBehaviour:
   timeSpeed: 1
   sunLight: {fileID: 735553542}
   moonLight: {fileID: 2123974742}
-  cloudsMaterial: {fileID: 2100000, guid: c310488214c87214e969b87fa3e4ead9, type: 2}
-  starsMaterial: {fileID: 2100000, guid: 04876a30801f49947b45508093404c66, type: 2}
+  clouds: {fileID: 660117388}
+  stars: {fileID: 1613818862}
   starAlphaCurve:
     serializedVersion: 2
     m_Curve:
