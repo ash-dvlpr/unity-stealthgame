@@ -10,28 +10,26 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
-  m_Name: Localization-Locales
+  m_Name: Localization-Assets-Shared
   m_EditorClassIdentifier: 
-  m_GroupName: Localization-Locales
+  m_GroupName: Localization-Assets-Shared
   m_Data:
     m_SerializedData: []
-  m_GUID: f741c2e3cf342604395b8b962d425637
+  m_GUID: dd8afa0c2f4f9b840981fa41e4d047ba
   m_SerializeEntries:
-  - m_GUID: 652673d165077144bbe9a8256c41c441
-    m_Address: Spanish (es)
+  - m_GUID: b81f6a15f3d7d194a9aa42cac9ab2a2e
+    m_Address: Assets/Data/Localization/Tables/GameTranslations Shared Data.asset
     m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: 94983c2cc4c274a4a911f6d29ea4090f
-    m_Address: English (en)
+  - m_GUID: c63971e17487cd84faab20b51cac503e
+    m_Address: Assets/Data/Localization/Tables/GameAssetTranslations Shared Data.asset
     m_ReadOnly: 1
-    m_SerializedLabels:
-    - Locale
+    m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 1
   m_Settings: {fileID: 11400000, guid: 57c3a09042d30974284a57de15adb8b9, type: 2}
   m_SchemaSet:
     m_Schemas:
-    - {fileID: 11400000, guid: 37527ad4489a1544bbb715c69bf27aaa, type: 2}
-    - {fileID: 11400000, guid: 4263e25fe9a5902459bd1f0eabf7d4dc, type: 2}
+    - {fileID: 11400000, guid: 4add7fef94850d7418c2792fc76252e8, type: 2}
+    - {fileID: 11400000, guid: 6429d6cd1d7ed4a42ae93bb6bd0553fc, type: 2}
