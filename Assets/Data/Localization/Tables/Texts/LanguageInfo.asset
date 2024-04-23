@@ -9,15 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4db626ad063b13545924a9839ac5fa83, type: 3}
-  m_Name: GameAssetTranslations
+  m_Script: {fileID: 11500000, guid: 5be51871efa6c3e4eae1703925c8f5ac, type: 3}
+  m_Name: LanguageInfo
   m_EditorClassIdentifier: 
-  m_SharedTableData: {fileID: 11400000, guid: c63971e17487cd84faab20b51cac503e, type: 2}
+  m_SharedTableData: {fileID: 11400000, guid: b81f6a15f3d7d194a9aa42cac9ab2a2e, type: 2}
   m_Tables:
-  - {fileID: 11400000, guid: 4cf0c0191aacf3649a3ba8a968f8d1b2, type: 2}
-  - {fileID: 11400000, guid: 13eddbf302875fd47849a302cc0356ca, type: 2}
+  - {fileID: 11400000, guid: b7eef77e042da4043be1ea4cba7f93aa, type: 2}
+  - {fileID: 11400000, guid: 796746371434c6740b467dd1a18dee7b, type: 2}
   m_Extensions: []
-  m_Group: Asset Table
+  m_Group: String Table
   references:
     version: 2
     RefIds: []

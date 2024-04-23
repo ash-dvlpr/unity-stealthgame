@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
-  m_Name: GameTranslations Shared Data
+  m_Name: LanguageInfo Shared Data
   m_EditorClassIdentifier: 
-  m_TableCollectionName: GameTranslations
+  m_TableCollectionName: LanguageInfo
   m_TableCollectionNameGuidString: b81f6a15f3d7d194a9aa42cac9ab2a2e
   m_Entries:
   - m_Id: 13847124078592
-    m_Key: langName
+    m_Key: name
     m_Metadata:
       m_Items: []
   m_Metadata:

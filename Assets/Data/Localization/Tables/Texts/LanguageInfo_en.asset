@@ -9,17 +9,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 97269afb30aa84742ae3f3342603618a, type: 3}
-  m_Name: GameAssetTranslations_en
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: LanguageInfo_en
   m_EditorClassIdentifier: 
   m_LocaleId:
     m_Code: en
-  m_SharedData: {fileID: 11400000, guid: c63971e17487cd84faab20b51cac503e, type: 2}
+  m_SharedData: {fileID: 11400000, guid: b81f6a15f3d7d194a9aa42cac9ab2a2e, type: 2}
   m_Metadata:
     m_Items: []
   m_TableData:
-  - m_Id: 255196753920
-    m_Localized: 9b49fa853d8ab5d41a6000e9d31d978f[S_LocaleIcon_EN]
+  - m_Id: 13847124078592
+    m_Localized: English
     m_Metadata:
       m_Items: []
   references:
