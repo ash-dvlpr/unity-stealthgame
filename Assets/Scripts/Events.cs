@@ -11,17 +11,22 @@ public struct GameplayEvent : IEvent {
     public EventMetadata data;
 }
 
-public struct CollectibleEvent : IEvent {
-    public Collectible collectible;
-    public Type resourceType;
-    public float amount;
-}
-
 public enum EventMetadata : byte {
     NONE        = 0,
     SETUP       = 1,
     OBJECTIVE   = 2,
 }
+
+
+
+
+// Collectiles Events
+public struct CollectibleEvent : IEvent {
+    public Type ResourceType => collectible.ResourceType;
+    public ICollectible<Resource> collectible;
+}
+
+
 
 
 // Events for cinematic stuff
@@ -34,6 +39,8 @@ public enum CinematicID : byte {
     VICTORY     = 1,
     DEFEAT      = 2,
 }
+
+
 
 
 // Events for cinematic stuff

@@ -1,19 +1,22 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 using CinderUtils.Events;
 using CinderUtils.Extensions;
 
 
-[RequireComponent(typeof(Health))]
 public class Player : MonoBehaviour {
     // ======================= Events ========================
+    readonly Dictionary<Type, Resource> resources = new();
     EventBinding<CollectibleEvent> collectibleEvents = new();
 
     // ====================== Variables ======================
 
     // ===================== Unity Stuff =====================
     void Awake() {
+        GetComponents<Resource>().ForEach(r => resources.Add(r.GetType(), r));
+
         collectibleEvents.OnEvent += OnPickup;
     }
 
@@ -27,12 +30,9 @@ public class Player : MonoBehaviour {
 
     // ===================== Custom Code =====================
     void OnPickup(CollectibleEvent e) {
-        // If the collectible is for 
-        if (e.resourceType.Is<Resource>()) {
-            if (TryGetComponent(e.resourceType, out var _resource)) { 
-                var resource = _resource as Resource;
-                resource.Add(e.amount);
-            }
+        // Check if we have the resource needed to handle that event.
+        if (resources.TryGetValue(e.ResourceType, out var _resource)) {
+            _resource.Add(e.collectible.Amount);
         }
     }
 }

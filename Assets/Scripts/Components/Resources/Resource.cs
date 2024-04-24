@@ -11,7 +11,7 @@ using CinderUtils.Attributes;
 /// Generic abstract resource component.
 /// </summary>
 public abstract class Resource : MonoBehaviour {
-    public enum ResourceType : byte {
+    public enum ResourceKind : byte {
         /// <summary>
         /// <see cref="Amount">Amount</see> will start off at it's <see cref="Max">Max</see> value.
         /// </summary>
@@ -29,7 +29,7 @@ public abstract class Resource : MonoBehaviour {
     /// <value>
     /// Determines the behaviour of the <see cref="Reset">Reset()</see> method.
     /// </value>
-    public abstract ResourceType ResType { get; }
+    public abstract ResourceKind Kind { get; }
 
     // ====================== Variables ======================
     [SerializeField, Disabled] private float _amount;
@@ -60,13 +60,13 @@ public abstract class Resource : MonoBehaviour {
     void Reset() {
         Max = Math.Max(1, Max);
 
-        switch (ResType) {
-            case ResourceType.Scarse:
+        switch (Kind) {
+            case ResourceKind.Scarse:
                 Amount = 0; break;
-            case ResourceType.Plentiful:
+            case ResourceKind.Plentiful:
                 Amount = Max; break;
             default:
-                throw new NotImplementedException($"'Resource.Reset()': Missing implementation for enum variant: '{ResType}'");
+                throw new NotImplementedException($"'Resource.Reset()': Missing implementation for enum variant: '{Kind}'");
         }
     }
 

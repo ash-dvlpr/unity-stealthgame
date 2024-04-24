@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Health : Resource {
     // ==================== Configuration ====================
-    public override ResourceType ResType => ResourceType.Plentiful;
+    public override ResourceKind Kind => ResourceKind.Plentiful;
 
     // ====================== Variables ======================
     public bool IsAlive => Amount > 0;

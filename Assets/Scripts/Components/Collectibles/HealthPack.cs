@@ -5,17 +5,11 @@ using UnityEngine;
 using CinderUtils.Events;
 
 
-public class HealthPack : Collectible {
+public class HealthPack : Collectible<Health> {
     // ==================== Configuration ====================
     [Header("On Collect")]
     [SerializeField] float healthAmount = 10f;
 
-    // ===================== Custom Code =====================
-    protected override void Collect(Collider other) {
-        EventBus.Raise<CollectibleEvent>(new() { 
-            collectible = this, 
-            resourceType = typeof(Health),
-            amount = healthAmount,
-        });
-    }
+    // ====================== Variables ======================
+    public override float Amount => healthAmount;
 }
