@@ -8,6 +8,7 @@ using UnityEngine;
 public class GameplayConfig : ScriptableObject {
     // ====================== Variables ======================
     [field: SerializeField] public float MaxTime { get; private set; } = 60f; 
+    [field: SerializeField] public float TimePerObjective { get; private set; } = 20f; 
     [field: SerializeField] public int MinutesPerDay { get; private set; } = 60; 
     
     

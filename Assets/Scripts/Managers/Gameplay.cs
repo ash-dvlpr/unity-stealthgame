@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 using CinderUtils.Events;
 using CinderUtils.Attributes;
-using UnityEngine.SceneManagement;
-using UnityEngine.InputSystem;
+
 
 public enum GameState : byte {
     NONE            = 0,
@@ -100,7 +101,10 @@ public class Gameplay : MonoBehaviour {
             // Objective advanced
             case EventMetadata.OBJECTIVE: {
                 if (objectiveIds.Contains(e.id)) {
+                    // Decrease the number of remaining objectives
                     remainingObjectives--;
+                    // Give back some time to the player
+                    remainingTime += Config.TimePerObjective;
                 }
                 break;
             }
