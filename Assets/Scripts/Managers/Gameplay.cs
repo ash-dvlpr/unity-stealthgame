@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 using CinderUtils.Events;
 using CinderUtils.Attributes;
-using UnityEngine.SceneManagement;
-using UnityEngine.InputSystem;
+using CinderUtils.Extensions;
+
 
 public enum GameState : byte {
     NONE            = 0,
@@ -18,21 +20,25 @@ public class Gameplay : MonoBehaviour {
     EventBinding<GameplayEvent> gameplayEvents = new();
 
     // ==================== Configuration ====================
-    [field: SerializeField] public GameplayConfig Config { get; private set; }
+    [field: SerializeField] GameplayConfig Config;
 
     [Header("Player")]
-    [SerializeField] public PlayerInput player;
+    [SerializeField] PlayerInput player;
+
+    [Header("Collectibles")]
+    [SerializeField] HealthPack healthPackPrefab;
+    [SerializeField] List<Transform> spawnPositions = new();
 
     // ====================== Variables ======================
-    public HashSet<int> objectiveIds = new();
+    HashSet<int> objectiveIds = new();
     int remainingObjectives = 0;
     
     [Header("Game State")]
     [Disabled, SerializeField] float remainingTime = 0f;
     GameState gameState;
 
-    public int TotalObjectives { get => objectiveIds.Count; }
-    public int RemainingObjectives { get => remainingObjectives; }
+    int TotalObjectives { get => objectiveIds.Count; }
+    int RemainingObjectives { get => remainingObjectives; }
 
     // ===================== Unity Stuff =====================
     void Awake() {
@@ -91,16 +97,22 @@ public class Gameplay : MonoBehaviour {
         switch (e.data) {
             case EventMetadata.NONE: return;
 
-            // Register Objectives
-            case EventMetadata.SETUP: {
+            // Game setup. Register Objectives.
+            case EventMetadata.OBJECTIVE_SETUP: {
                 objectiveIds.Add(e.id);
                 break;
             }
 
-            // Objective advanced
-            case EventMetadata.OBJECTIVE: {
+            // Progress was made towards the objective
+            case EventMetadata.OBJECTIVE_COMPLETED: {
+                // Verify the objective
                 if (objectiveIds.Contains(e.id)) {
+                    // Decrease the number of remaining objectives
                     remainingObjectives--;
+                    // Give back some time to the player
+                    remainingTime += Config.TimePerObjective;
+                    // Spawn a HealthPack
+                    SpawnHeathPack();
                 }
                 break;
             }
@@ -130,5 +142,12 @@ public class Gameplay : MonoBehaviour {
         player.enabled = false;
 
         // TODO: Reload Scene
+    }
+
+    void SpawnHeathPack() {
+        if (!healthPackPrefab || spawnPositions.NullOrEmpty()) return;
+
+        var position = spawnPositions.GetRandom().position;
+        Instantiate(healthPackPrefab.gameObject, position, Quaternion.identity);
     }
 }
