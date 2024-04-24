@@ -88,8 +88,8 @@ public class DayNightCycle : MonoBehaviour {
         }
 
         //? Update shaders
-        //cloudsMaterial.mainTextureOffset = new Vector2(.2f * degrees, .1f * degrees);
         cloudsMaterial.SetFloat(EXTERNAL_TIME_SHADER_PROPERTY, time);
+        starsMaterial.SetFloat(EXTERNAL_TIME_SHADER_PROPERTY, time);
 
         // Calculate stars transparency
         float starAlpha = starAlphaCurve.Evaluate(normalizedTimeOfDay);
