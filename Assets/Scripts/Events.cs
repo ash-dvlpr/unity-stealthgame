@@ -12,9 +12,9 @@ public struct GameplayEvent : IEvent {
 }
 
 public enum EventMetadata : byte {
-    NONE        = 0,
-    SETUP       = 1,
-    OBJECTIVE   = 2,
+    NONE                = 0,
+    OBJECTIVE_SETUP     = 1,
+    OBJECTIVE_COMPLETED = 2,
 }
 
 
