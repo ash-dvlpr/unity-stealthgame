@@ -16,9 +16,9 @@ public class FieldOfView : MonoBehaviour {
 
     // ==================== Configuration ====================
     [field: SerializeField] public Transform EyeTransform { get; private set; }
-    [field: SerializeField, Range(0, 360)] public float ViewAngle { get; private set; }
-    [field: SerializeField, Min(0)] public float Range { get; private set; }
-    [field: SerializeField, Min(0)] public float PresenceRange { get; private set; }
+    [field: SerializeField, Range(0, 360)] public float ViewAngle { get; set; }
+    [field: SerializeField, Min(0)] public float Range { get; set; }
+    [field: SerializeField, Min(0)] public float PresenceRange { get; set; }
     [field: SerializeField] public EDetectionMode DetectionMode { get; set; }
     [field: SerializeField] public LayerMask TargetMask { get; private set; }
     [field: SerializeField] public LayerMask ObstacleMask { get; private set; }

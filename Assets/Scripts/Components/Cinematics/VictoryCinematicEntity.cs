@@ -1,9 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
-
-using CinderUtils.Events;
-using CinderUtils.Attributes;
 
 
 [RequireComponent(typeof(ParticleSystem))]

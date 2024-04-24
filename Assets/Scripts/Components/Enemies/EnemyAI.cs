@@ -6,7 +6,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent), typeof(FieldOfView))]
 public class EnemyAI : BaseStateMachine<EnemyAI.EState> {
     public enum EState : int {
-        START   = 0,
+        START   = 0, // default
         PATROL  = 1,
         CHASE   = 2,
         ATTACK  = 3,
