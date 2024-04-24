@@ -26,17 +26,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 11135c5cc40e38149bc86f9b76056a9c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.02
+      value: 0.157
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 11135c5cc40e38149bc86f9b76056a9c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.076
+      value: -0.084
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 11135c5cc40e38149bc86f9b76056a9c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.025
+      value: 0.112
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 11135c5cc40e38149bc86f9b76056a9c,
         type: 3}
@@ -155,7 +155,7 @@ PrefabInstance:
     - target: {fileID: 4460166094856869032, guid: aba2e113f0a05f146ad4313f297d0464,
         type: 3}
       propertyPath: m_Name
-      value: P_Collectible_Objective (2) Variant
+      value: P_Collectible_Armor
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:
