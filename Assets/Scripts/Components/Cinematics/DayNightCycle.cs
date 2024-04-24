@@ -5,6 +5,7 @@ using CinderUtils.Events;
 
 
 public class DayNightCycle : MonoBehaviour {
+    const string EXTERNAL_TIME_SHADER_PROPERTY = "_ExternalTime";
     const string STARS_ALPHA_SHADER_PROPERTY = "_StarTransparency";
 
     // ======================= Events ========================
@@ -87,7 +88,8 @@ public class DayNightCycle : MonoBehaviour {
         }
 
         //? Update shaders
-        cloudsMaterial.mainTextureOffset = new Vector2(.2f * degrees, .1f * degrees);
+        //cloudsMaterial.mainTextureOffset = new Vector2(.2f * degrees, .1f * degrees);
+        cloudsMaterial.SetFloat(EXTERNAL_TIME_SHADER_PROPERTY, time);
 
         // Calculate stars transparency
         float starAlpha = starAlphaCurve.Evaluate(normalizedTimeOfDay);
