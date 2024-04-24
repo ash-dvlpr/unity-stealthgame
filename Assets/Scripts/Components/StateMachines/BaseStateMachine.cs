@@ -1,10 +1,6 @@
 using System;
-using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-using CinderUtils.Extensions;
 
 
 public abstract class BaseStateMachine<EState> : MonoBehaviour where EState : Enum {
