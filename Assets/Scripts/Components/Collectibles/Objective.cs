@@ -5,7 +5,7 @@ using UnityEngine;
 using CinderUtils.Events;
 
 
-public class Coin : Collectible {
+public class Objective : Collectible {
 
     // ===================== Unity Stuff =====================
     void OnEnable() {
