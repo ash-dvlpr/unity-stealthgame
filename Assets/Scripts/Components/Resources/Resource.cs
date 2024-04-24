@@ -79,4 +79,8 @@ public abstract class Resource : MonoBehaviour {
     public void ResetValues() {
         Reset();
     }
+
+    public void Add(float amount) {
+        Amount += amount;
+    }
 }

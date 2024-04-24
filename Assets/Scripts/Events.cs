@@ -11,12 +11,16 @@ public struct GameplayEvent : IEvent {
     public EventMetadata data;
 }
 
+public struct CollectibleEvent : IEvent {
+    public Collectible collectible;
+    public Type resourceType;
+    public float amount;
+}
+
 public enum EventMetadata : byte {
     NONE        = 0,
     SETUP       = 1,
     OBJECTIVE   = 2,
-    COLLECTIBLE = 3,
-    TRIGGER     = 4,
 }
 
 
