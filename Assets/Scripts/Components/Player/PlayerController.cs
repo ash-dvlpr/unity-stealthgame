@@ -1,3 +1,4 @@
+using GameExtensions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -42,6 +43,9 @@ public class PlayerController : BaseStateMachine<PlayerController.State> {
 
     // Jumping
     float _groundCheckRadius = .28f;
+    float _groundCheckOffset = .1f;
+
+    Vector3 _groundCheckPosition => transform.position.OffsetY(_groundCheckOffset);
     LayerMask _groundMask;
     LayerMask _waterMask;
 
@@ -112,7 +116,7 @@ public class PlayerController : BaseStateMachine<PlayerController.State> {
         };
 
         // When the object is selected, draw a gizmo in the position of, and matching radius of, the grounded collider
-        Gizmos.DrawSphere(transform.position, _groundCheckRadius);
+        Gizmos.DrawSphere(_groundCheckPosition, _groundCheckRadius);
     }
 
     // ===================== Custom Code =====================
@@ -155,7 +159,7 @@ public class PlayerController : BaseStateMachine<PlayerController.State> {
     }
 
     bool CheckOverlap(LayerMask mask) {
-        return Physics.CheckSphere(transform.position, _groundCheckRadius, mask, QueryTriggerInteraction.Ignore);
+        return Physics.CheckSphere(_groundCheckPosition, _groundCheckRadius, mask, QueryTriggerInteraction.Ignore);
     }
 
     private void ResetExcessiveGravity() {
