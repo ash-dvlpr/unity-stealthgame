@@ -1,9 +1,11 @@
+using CinderUtils.Extensions;
 using GameExtensions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.XR;
 
 
 [RequireComponent(typeof(CharacterController), typeof(Animator), typeof(PlayerInputHandle))]
@@ -55,7 +57,7 @@ public class PlayerController : BaseStateMachine<PlayerController.State> {
     [NonSerialized] public float TargetRotation = 0f;
 
     float _speed;
-    //float _animationBlend;
+    float _animationBlend;
     float _rotationVelocity;
     float _terminalVelocity = 53.0f;
 
@@ -119,6 +121,25 @@ public class PlayerController : BaseStateMachine<PlayerController.State> {
         Gizmos.DrawSphere(_groundCheckPosition, _groundCheckRadius);
     }
 
+    private void OnFootstep(AnimationEvent animationEvent) {
+        if (animationEvent.animatorClipInfo.weight > 0.5f) {
+            var clip = Config.FootstepAudioClips.GetRandom();
+
+            if (clip) AudioSource.PlayClipAtPoint(
+                clip, transform.TransformPoint(CharacterController.center), Config.FootstepAudioVolume
+            );
+        }
+    }
+
+    private void OnLand(AnimationEvent animationEvent) {
+        if (animationEvent.animatorClipInfo.weight > 0.5f) {
+            var clip = Config.LandingAudioClip;
+            if (clip) AudioSource.PlayClipAtPoint(
+                clip, transform.TransformPoint(CharacterController.center), Config.FootstepAudioVolume
+            );
+        }
+    }
+
     // ===================== Custom Code =====================
     protected override void InitializeStates() {
         states[State.IDLE] = new PlayerControllerState_Idle(this);
@@ -156,6 +177,10 @@ public class PlayerController : BaseStateMachine<PlayerController.State> {
     void UpdateSensors() {
         Grounded = CheckOverlap(_groundMask);
         Wet = CheckOverlap(_waterMask);
+
+        //? Update animator values
+        Animator.SetBool(AnimatorID.Grounded, Grounded);
+        Animator.SetBool(AnimatorID.Wet, Wet);
     }
 
     bool CheckOverlap(LayerMask mask) {
@@ -164,6 +189,10 @@ public class PlayerController : BaseStateMachine<PlayerController.State> {
 
     private void ResetExcessiveGravity() {
         if (Grounded || Wet) {
+            //? Update animator values
+            Animator.SetBool(AnimatorID.Jump, false);
+            Animator.SetBool(AnimatorID.FreeFall, false);
+
             // reset the fall timeout timer
             // FallTimeoutDelta = FallTimeout
 
@@ -205,8 +234,8 @@ public class PlayerController : BaseStateMachine<PlayerController.State> {
 
 
         // Calculate the animationBlend value for the Animator blendTree
-        //_animationBlend = Mathf.Lerp(_animationBlend, TargetSpeed, Time.deltaTime * Config.Acceleration);
-        //if (_animationBlend <= float.Epsilon) _animationBlend = 0f;
+        _animationBlend = Mathf.Lerp(_animationBlend, TargetSpeed, Time.deltaTime * Config.Acceleration);
+        if (_animationBlend <= float.Epsilon) _animationBlend = 0f;
 
         //? Apply the character's rotation
         if (Input.move != Vector2.zero) {
@@ -224,5 +253,9 @@ public class PlayerController : BaseStateMachine<PlayerController.State> {
             targetDirection.normalized * ( _speed * Time.deltaTime )
             + new Vector3(0.0f, VerticalVelocity, 0.0f) * Time.deltaTime
         );
+
+        //? Update animator values
+        Animator.SetFloat(AnimatorID.Speed, _animationBlend);
+        Animator.SetFloat(AnimatorID.MotionSpeed, inputMagnitude);
     }
 }
