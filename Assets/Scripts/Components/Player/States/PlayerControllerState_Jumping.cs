@@ -13,11 +13,20 @@ public class PlayerControllerState_Jumping : PlayerControllerState {
     public override void Enter() {
         // Apply jump forces
         Context.VerticalVelocity = Mathf.Sqrt(Config.JumpHeight * -2f * Config.Gravity);
+        
+        //? Update animator values
+        Context.Animator.SetBool(AnimatorID.Jump, true);
+    }
+    public override void Tick() {
+        //? Update animator values
+        if (!OnFallCooldown) Context.Animator.SetBool(AnimatorID.FreeFall, true);
     }
 
     public override void Exit() {
+        Context.Animator.SetBool(AnimatorID.Jump, false);
         Context.TargetSpeed = 0;
     }
+
 
     public override PlayerController.State NextState() {
         if (Grounded) {
