@@ -6,12 +6,14 @@ using CinderUtils.Events;
 using CinderUtils.Extensions;
 
 
+[RequireComponent(typeof(PlayerController), typeof(Health))]
 public class Player : MonoBehaviour {
     // ======================= Events ========================
     readonly Dictionary<Type, Resource> resources = new();
     EventBinding<CollectibleEvent> collectibleEvents = new();
 
     // ====================== Variables ======================
+    Health HP => (Health) resources[typeof(Health)];
 
     // ===================== Unity Stuff =====================
     void Awake() {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "CFG_AI", menuName = "Configuration/EnemyAI Config", order = 2)]
+[CreateAssetMenu(fileName = "CFG_AI", menuName = "Configuration/EnemyAI Config", order = 3)]
 public class AIConfig : ScriptableObject {
     // ==================== Configurations ===================
     [Serializable]
