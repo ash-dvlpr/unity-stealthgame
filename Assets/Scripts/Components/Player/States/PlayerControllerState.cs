@@ -1,5 +1,7 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
+
 
 public abstract class PlayerControllerState : BaseState<PlayerController.State> {
     protected PlayerControllerState(PlayerController context) {
@@ -8,24 +10,34 @@ public abstract class PlayerControllerState : BaseState<PlayerController.State> 
 
     // ====================== Variables ======================
     protected PlayerController Context { get; set; }
-    protected PlayerConfig.StateConfig StateConfig => Context.Config[Key];
+    //protected PlayerConfig.StateConfig StateConfig => Context.Config[Key];
     protected PlayerConfig Config => Context.Config;
+    protected PlayerInputHandle Input => Context.Input;
+
+
+
+
 
     // ===================== Custom Code =====================
-    public override void Enter() {
-        ApplyConfig();
-    }
-    public override void Tick() {
-        //UpdateAnimator();
-    }
-
-    //protected virtual void UpdateAnimator() {
-    //    Context.Animator.SetFloat("Speed", Context.Agent.velocity.magnitude);
+    //public override void Enter() {
+    //    ApplyConfig();
     //}
 
-    protected void ApplyConfig() {
-        //if (StateConfig.State != 0) {
-        //    // Navigation
-        //}
-    }
+    //public override void Tick() {
+
+    //    JumpAndGravity();
+    //    GroundedCheck();
+    //    Move();
+    //}
+
+    //protected void ApplyConfig() {
+    //    if (StateConfig.State != 0) {
+    //        // Navigation
+    //    }
+    //}
+
+
+
+
+    
 }

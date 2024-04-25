@@ -30,6 +30,10 @@ public abstract class BaseStateMachine<EState> : MonoBehaviour where EState : En
         }
     }
 
+    protected virtual void LateUpdate() { 
+        ActiveState.LateTick();
+    }
+
     protected virtual void FixedUpdate() {
         ActiveState.FixedTick();
     }

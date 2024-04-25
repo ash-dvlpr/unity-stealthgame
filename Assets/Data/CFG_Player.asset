@@ -12,7 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63840ec41772bc7479c6dc65471b8104, type: 3}
   m_Name: CFG_Player
   m_EditorClassIdentifier: 
-  configs: []
+  configs:
+  - State: 0
+    MoveSpeed: 2
+  - State: 1
+    MoveSpeed: 2
   <WalkSpeed>k__BackingField: 2
   <RunSpeed>k__BackingField: 5.335
-  <JumpForce>k__BackingField: 0
+  <Acceleration>k__BackingField: 10
+  <JumpHeight>k__BackingField: 1.2
+  Gravity: -15
+  <RotationSmoothTime>k__BackingField: 0.12
