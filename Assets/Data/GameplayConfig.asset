@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ac8e56f6fa761f428a61c27e41857e9, type: 3}
   m_Name: GameplayConfig
   m_EditorClassIdentifier: 
-  <MaxTime>k__BackingField: 60
-  <MinutesPerDay>k__BackingField: 24
+  <MinutesPerDay>k__BackingField: 20
+  <MinutesMaxTime>k__BackingField: 10
+  <MinutesPerPatrol>k__BackingField: 5
+  <SecondsPerObjective>k__BackingField: 60
