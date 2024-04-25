@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using System.Collections;
 using System.Collections.Generic;
 
 using UnityEngine;
@@ -10,13 +12,15 @@ using CinderUtils.Attributes;
 using CinderUtils.Extensions;
 
 
-public enum GameState : byte {
-    NONE            = 0,
-    GAME_STARTED    = 1,
-    GAME_ENDED      = 2,
-}
+
 
 public class Gameplay : MonoBehaviour {
+    public enum State : byte {
+        NONE            = 0,
+        GAME_STARTED    = 1,
+        GAME_ENDED      = 2,
+    }
+
     // ======================= Events ========================
     EventBinding<GameplayEvent> gameplayEvents = new();
 
@@ -30,13 +34,19 @@ public class Gameplay : MonoBehaviour {
     [SerializeField] HealthPack healthPackPrefab;
     [SerializeField] List<Transform> spawnPositions = new();
 
+    [Header("Enemies")]
+    [SerializeField] List<EnemyAI> enemies = new();
+
     // ====================== Variables ======================
-    HashSet<int> objectiveIds = new();
-    int remainingObjectives = 0;
-    
     [Header("Game State")]
     [Disabled, SerializeField] float remainingTime = 0f;
-    GameState gameState;
+    State gameState;
+
+    HashSet<int> objectiveIds = new();
+    int remainingObjectives = 0;
+
+    List<AIPatrol> enemyPatrols = new();
+    int patrolOffset = 0;
 
     int TotalObjectives { get => objectiveIds.Count; }
     int RemainingObjectives { get => remainingObjectives; }
@@ -53,6 +63,7 @@ public class Gameplay : MonoBehaviour {
 
     void OnDisable() {
         EventBus.Deregister(gameplayEvents);
+        StopAllCoroutines();
     }
 
     void Start() {
@@ -61,36 +72,39 @@ public class Gameplay : MonoBehaviour {
 
     void Update() {
         switch (gameState) {
-            case GameState.NONE: {
+            case State.NONE: {
                 if (Input.GetKeyDown(KeyCode.Return)) {
-                    gameState = GameState.GAME_STARTED;
+                    gameState = State.GAME_STARTED;
                     player.enabled = true;
                 }
                 break;
-            } 
-            case GameState.GAME_ENDED: {
+            }
+            case State.GAME_ENDED: {
                 if (Input.GetKeyDown(KeyCode.Return)) {
                     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                 }
                 break;
-            } 
-            case GameState.GAME_STARTED: { 
+            }
+            case State.GAME_STARTED: {
                 remainingTime -= Time.deltaTime;
                 CheckWinCondition();
                 break;
-            } 
+            }
         }
     }
     // ===================== Custom Code =====================
     void Restore() {
         objectiveIds.Clear();
-        remainingTime = Config.MaxTime;
+        remainingTime = Config.SecondsMaxTime;
+        InitEnemyPatrols();
     }
 
     void RestartState() {
-        gameState = GameState.NONE;
+        StopAllCoroutines();
+        gameState = State.NONE;
         remainingObjectives = TotalObjectives;
         player.enabled = false;
+        StartCoroutine(RotateEnemyPatrols());
     }
 
     void OnGameplayEvent(GameplayEvent e) {
@@ -111,7 +125,7 @@ public class Gameplay : MonoBehaviour {
                     // Decrease the number of remaining objectives
                     remainingObjectives--;
                     // Give back some time to the player
-                    remainingTime += Config.TimePerObjective;
+                    remainingTime += Config.SecondsPerObjective;
                     // Spawn a HealthPack
                     SpawnHeathPack();
                 }
@@ -130,7 +144,7 @@ public class Gameplay : MonoBehaviour {
 
     void TriggerWin() {
         Debug.Log("VICTORY!");
-        gameState = GameState.GAME_ENDED;
+        gameState = State.GAME_ENDED;
         player.enabled = false;
 
         // Trigger win fireworks
@@ -138,8 +152,10 @@ public class Gameplay : MonoBehaviour {
     }
 
     void TriggerDefeat() {
+        StopAllCoroutines();
+
         Debug.Log("DEFEAT!");
-        gameState = GameState.GAME_ENDED;
+        gameState = State.GAME_ENDED;
         player.enabled = false;
 
         // TODO: Reload Scene
@@ -150,5 +166,32 @@ public class Gameplay : MonoBehaviour {
 
         var position = spawnPositions.GetRandom().position;
         Instantiate(healthPackPrefab.gameObject, position, Quaternion.identity);
+    }
+
+    void InitEnemyPatrols() {
+        // Clear previous patrols
+        enemyPatrols.Clear();
+
+        // List all of the enemies's patrols
+        foreach (var enemy in enemies) {
+            enemyPatrols.Add(enemy.Patrol);
+        }
+    }
+
+    IEnumerator RotateEnemyPatrols() {
+        while (true) {
+            // Increase the offset for the next time, and wait before changing again.
+            yield return new WaitForSeconds(Config.SecondsPerPatrol);
+            patrolOffset++;
+
+            // Assign patrol to enemies
+            for (int i = 0 ; i < enemies.Count ; i++) {
+                var enemy = enemies[i];
+                // Offset the index and loop (%)
+                int _i = ( i + patrolOffset ) % enemyPatrols.Count;
+
+                enemy.SwapPatrol(enemyPatrols[_i]);
+            }
+        }
     }
 }
