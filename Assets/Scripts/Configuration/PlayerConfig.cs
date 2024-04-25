@@ -35,11 +35,15 @@ public class PlayerConfig : ScriptableObject {
     [field: Tooltip("Acceleration and deceleration")]
     [field: SerializeField, Min(0)] public float Acceleration { get; private set; } = 10.0f;
 
+
+    [field: Header("Jumping")]
     [Tooltip("The height the player can jump")]
     [field: SerializeField, Min(0)] public float JumpHeight { get; private set; } = 1.2f;
 
     [Tooltip("The character uses its own gravity value. The engine default is -9.81f")]
     [field: SerializeField, Min(0)] public float Gravity { get; private set; } = -15.0f;
+    [field: SerializeField] public LayerMask GroundLayers { get; private set; }
+    [field: SerializeField] public LayerMask WaterLayers { get; private set; }
 
     //[field: Header("Smoothing")]
     //[Tooltip("How fast the character turns to face movement direction")]

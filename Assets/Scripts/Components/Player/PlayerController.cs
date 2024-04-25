@@ -29,8 +29,15 @@ public class PlayerController : BaseStateMachine<PlayerController.State> {
 
     // ====================== Variables ======================
     public bool Grounded { get; private set; } = true;
+    public bool Wet { get; private set; } = false;
+
     bool IsCurrentDeviceMouse => PlayerInput.currentControlScheme == "KeyboardMouse";
-    
+
+    // Physics
+    LayerMask _groundMask;
+    LayerMask _waterMask;
+    float _groundCheckRadius = .28f;
+
     // Camera
     float _targetYaw;
     float _targetPitch;
@@ -43,7 +50,17 @@ public class PlayerController : BaseStateMachine<PlayerController.State> {
         Input = GetComponent<PlayerInputHandle>();
         Animator = GetComponentInChildren<Animator>();
 
+        // Cache some configs
+        _groundMask = Config.GroundLayers;
+        _waterMask = Config.WaterLayers;
+        _groundCheckRadius = CharacterController.radius;
+
         base.Awake();
+    }
+
+    protected override void Update() {
+        UpdateSensors();
+        base.Update();
     }
 
     protected override void LateUpdate() {
@@ -51,12 +68,28 @@ public class PlayerController : BaseStateMachine<PlayerController.State> {
         base.LateUpdate();
     }
 
+    void OnDrawGizmosSelected() {
+        Color green = new Color(0.0f, 1.0f, 0.0f, 0.5f);
+        Color blue  = new Color(0.0f, 0.0f, 1.0f, 0.5f);
+        Color red   = new Color(1.0f, 0.0f, 0.0f, 0.5f);
+
+        // Set the gizmo color depending on the sensors
+        Gizmos.color = (Grounded, Wet) switch {
+            (true, false) => green,
+            (_, true) => blue,
+            _ => red,
+        };
+
+        // When the object is selected, draw a gizmo in the position of, and matching radius of, the grounded collider
+        Gizmos.DrawSphere(transform.position, _groundCheckRadius);
+    }
+
     // ===================== Custom Code =====================
     protected override void InitializeStates() {
         states[State.IDLE] = new PlayerControllerState_Idle(this);
         states[State.MOVING] = new PlayerControllerState_Moving(this);
         states[State.JUMPING] = new PlayerControllerState_Jumping(this);
-        // TODO: Add other states
+        // TODO: Swimming
 
         ActiveState = states[State.IDLE];
     }
@@ -77,6 +110,15 @@ public class PlayerController : BaseStateMachine<PlayerController.State> {
 
         // Rotate the camera root that the cinemachine camera will follow
         CameraRoot.transform.rotation = Quaternion.Euler(_targetPitch, _targetYaw, 0.0f);
+    }
+
+    void UpdateSensors() {
+        Grounded = CheckOverlap(_groundMask);
+        Wet = CheckOverlap(_waterMask);
+    }
+
+    bool CheckOverlap(LayerMask mask) { 
+        return Physics.CheckSphere(transform.position, _groundCheckRadius, mask, QueryTriggerInteraction.Ignore);
     }
 
     static float ClampAngle(float angle, float min, float max) {
