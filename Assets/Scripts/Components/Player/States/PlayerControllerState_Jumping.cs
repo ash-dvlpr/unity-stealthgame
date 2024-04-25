@@ -10,14 +10,26 @@ public class PlayerControllerState_Jumping : PlayerControllerState {
     public PlayerControllerState_Jumping(PlayerController context) : base(context) { }
 
     // ===================== Custom Code =====================
+    public override void Enter() {
+        // Apply jump forces
+        Context.VerticalVelocity = Mathf.Sqrt(Config.JumpHeight * -2f * Config.Gravity);
+    }
+
+    public override void Exit() {
+        Context.TargetSpeed = 0;
+    }
+
     public override PlayerController.State NextState() {
-        // If we are grounded
+        if (Grounded) {
+            // If we requested to jump and are able to, stay in the state and run the logic
+            if (Input.jump && CanJump) { 
+                Enter(); return Key;
+            }
 
-        // If jump was pressed, go to the jumping state
-        if (Input.jump) return PlayerController.State.JUMPING;
-
-        // If ther's no movement to process, go to idle
-        if (Input.move != Vector2.zero) return PlayerController.State.IDLE;
+            // On the other hand, id there's an movement request, we go to moving, else idle.
+            if (Input.move != Vector2.zero) return PlayerController.State.MOVING;
+            else return PlayerController.State.IDLE;
+        }
         
         // Otherwise stay on this state
         return Key; 

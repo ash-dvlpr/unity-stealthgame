@@ -46,8 +46,8 @@ public class PlayerConfig : ScriptableObject {
     [field: SerializeField] public LayerMask WaterLayers { get; private set; }
 
     //[field: Header("Smoothing")]
-    //[Tooltip("How fast the character turns to face movement direction")]
-    //[field: SerializeField, Range(0.0f, 0.3f)] public float RotationSmoothTime { get; private set; } = 0.12f;
+    [Tooltip("How fast the character turns to face movement direction")]
+    [field: SerializeField, Range(0.0f, 0.3f)] public float RotationSmoothTime { get; private set; } = 0.12f;
 
 
 

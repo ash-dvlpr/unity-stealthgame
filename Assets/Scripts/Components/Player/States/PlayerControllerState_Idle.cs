@@ -10,6 +10,9 @@ public class PlayerControllerState_Idle : PlayerControllerState {
     public PlayerControllerState_Idle(PlayerController context) : base(context) { }
 
     // ===================== Custom Code =====================
+    public override void Enter() {
+        Context.TargetSpeed = 0;
+    }
     public override PlayerController.State NextState() {
         // If the user has submitted movement, go to moving
         if (Input.move != Vector2.zero) return PlayerController.State.MOVING;

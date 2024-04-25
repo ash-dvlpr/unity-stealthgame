@@ -992,10 +992,10 @@ GameObject:
   - component: {fileID: 2049070220}
   - component: {fileID: 2049070221}
   - component: {fileID: 2049070225}
+  - component: {fileID: 2049070226}
   - component: {fileID: 2049070224}
   - component: {fileID: 2049070223}
   - component: {fileID: 2049070222}
-  - component: {fileID: 2049070226}
   m_Layer: 7
   m_Name: NewPlayer
   m_TagString: Player
@@ -1109,6 +1109,10 @@ MonoBehaviour:
   <Config>k__BackingField: {fileID: 11400000, guid: 84c55ce421f188c4dbeabd2ef305b049,
     type: 2}
   CameraRoot: {fileID: 1513726783}
+  VerticalVelocity: 0
+  JumpCooldownTimer: 0
+  FallCooldownDelta: 0
+  DebugState: 0
 --- !u!114 &2049070225
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -15,33 +15,13 @@ public abstract class PlayerControllerState : BaseState<PlayerController.State> 
     protected PlayerInputHandle Input => Context.Input;
     protected bool Grounded => Context.Grounded;
     protected bool Wet => Context.Wet;
-    protected bool OnJumpCooldown => false; // TODO: timer
-    protected bool CanJump => Context.Grounded && !Context.Wet && !OnJumpCooldown;
-
-
-
-
+    protected bool OnFallCooldown => Context.OnFallCooldown;
+    protected bool OnJumpCooldown => Context.OnJumpCooldown;
+    protected bool CanJump => Context.CanJump;
 
     // ===================== Custom Code =====================
     //public override void Enter() {
     //    ApplyConfig();
     //}
-
-    //public override void Tick() {
-
-    //    JumpAndGravity();
-    //    GroundedCheck();
-    //    Move();
-    //}
-
-    //protected void ApplyConfig() {
-    //    if (StateConfig.State != 0) {
-    //        // Navigation
-    //    }
-    //}
-
-
-
-
     
 }
