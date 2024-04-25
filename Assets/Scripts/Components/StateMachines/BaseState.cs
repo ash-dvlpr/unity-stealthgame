@@ -9,7 +9,8 @@ public abstract class BaseState<EState> where EState : Enum {
     public virtual void Enter() {}
     public virtual void Exit() {}
     public virtual void Tick() {}
-    public virtual void FixedTick() { }
+    public virtual void LateTick() {}
+    public virtual void FixedTick() {}
     public virtual EState NextState() => Key;
 
 }

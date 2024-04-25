@@ -20,7 +20,7 @@ public abstract class BaseStateMachine<EState> : MonoBehaviour where EState : En
     protected virtual void Update() {
         EState nextState = ActiveState.NextState();
 
-        // If still on the same state, update the staet
+        // If still on the same state, update the state
         if (nextState.Equals(ActiveState.Key)) {
             ActiveState.Tick();
         }
@@ -28,6 +28,10 @@ public abstract class BaseStateMachine<EState> : MonoBehaviour where EState : En
         else {
             TransitionState(nextState);
         }
+    }
+
+    protected virtual void LateUpdate() { 
+        ActiveState.LateTick();
     }
 
     protected virtual void FixedUpdate() {
