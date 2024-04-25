@@ -28,6 +28,7 @@ public class PlayerController : BaseStateMachine<PlayerController.State> {
     public Animator Animator { get; private set; }
 
     // ====================== Variables ======================
+    public bool Grounded { get; private set; } = true;
     bool IsCurrentDeviceMouse => PlayerInput.currentControlScheme == "KeyboardMouse";
     
     // Camera
@@ -53,6 +54,8 @@ public class PlayerController : BaseStateMachine<PlayerController.State> {
     // ===================== Custom Code =====================
     protected override void InitializeStates() {
         states[State.IDLE] = new PlayerControllerState_Idle(this);
+        states[State.MOVING] = new PlayerControllerState_Moving(this);
+        states[State.JUMPING] = new PlayerControllerState_Jumping(this);
         // TODO: Add other states
 
         ActiveState = states[State.IDLE];

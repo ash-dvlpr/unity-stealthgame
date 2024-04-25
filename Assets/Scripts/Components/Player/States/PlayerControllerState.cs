@@ -13,6 +13,9 @@ public abstract class PlayerControllerState : BaseState<PlayerController.State> 
     //protected PlayerConfig.StateConfig StateConfig => Context.Config[Key];
     protected PlayerConfig Config => Context.Config;
     protected PlayerInputHandle Input => Context.Input;
+    protected bool Grounded => Context.Grounded;
+    protected bool OnJumpCooldown => false; // TODO: timer
+    protected bool CanJump => Context.Grounded && !OnJumpCooldown;
 
 
 
