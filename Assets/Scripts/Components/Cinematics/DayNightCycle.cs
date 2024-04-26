@@ -13,7 +13,7 @@ public class DayNightCycle : MonoBehaviour {
 
     // ==================== Configuration ====================
     [field: SerializeField] public GameplayConfig Config { get; private set; }
-    
+
     [Header("Time Settings")]
     [SerializeField] float startingMinute = 1;
     [SerializeField] float timeSpeed = 1f;
@@ -37,14 +37,14 @@ public class DayNightCycle : MonoBehaviour {
     float time = 0f;
     Material cloudsMaterial;
     Material starsMaterial;
-    
+
 
     // ===================== Unity Stuff =====================
     private void Awake() {
         time = startingMinute * 60;
         sunLight.enabled = false;
         moonLight.enabled = false;
-    
+
         cloudsMaterial = _clouds.material;
         starsMaterial = _stars.material;
     }
@@ -88,8 +88,9 @@ public class DayNightCycle : MonoBehaviour {
         }
 
         //? Update shaders
-        cloudsMaterial.SetFloat(EXTERNAL_TIME_SHADER_PROPERTY, time);
-        starsMaterial.SetFloat(EXTERNAL_TIME_SHADER_PROPERTY, time);
+        var shaderTime = normalizedTimeOfDay * Config.SecondsPerDay;
+        cloudsMaterial.SetFloat(EXTERNAL_TIME_SHADER_PROPERTY, shaderTime);
+        starsMaterial.SetFloat(EXTERNAL_TIME_SHADER_PROPERTY, shaderTime);
 
         // Calculate stars transparency
         float starAlpha = starAlphaCurve.Evaluate(normalizedTimeOfDay);

@@ -111,13 +111,13 @@ Material:
     - _CloudAlpha: 0.4
     - _CloudDensity: 0.03
     - _CloudPower: 6.1
-    - _CloudSize: 0.1
+    - _CloudSize: 0.08
     - _CloudSpeed: 0.025
     - _Cull: 1
     - _Cutoff: 0.5
     - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
-    - _DistortionSize: 0.2
+    - _DistortionSize: 0.1
     - _DistortionSpeed: 0.01
     - _DstBlend: 10
     - _DstBlendAlpha: 10
