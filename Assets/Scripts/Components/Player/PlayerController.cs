@@ -102,7 +102,6 @@ public class PlayerController : BaseStateMachine<PlayerController.State> {
         _currentState = ActiveState.Key;
 #endif
 
-
         ApplyGravity();
         ApplyMovement();
     }

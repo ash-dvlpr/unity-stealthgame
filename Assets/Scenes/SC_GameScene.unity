@@ -3106,11 +3106,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1996973602051950992, guid: 598fd52469bfbbd4abad0da67f307a03,
-        type: 3}
-      propertyPath: <PresenceRange>k__BackingField
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2273639706530526689, guid: 598fd52469bfbbd4abad0da67f307a03,
         type: 3}
       propertyPath: m_Name
@@ -3127,26 +3122,6 @@ PrefabInstance:
       propertyPath: <Patrol>k__BackingField
       value: 
       objectReference: {fileID: 2000765683}
-    - target: {fileID: 4879845702811214065, guid: 598fd52469bfbbd4abad0da67f307a03,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 25b27ea9c49c8a241b4edf550574fdf4, type: 2}
-    - target: {fileID: 5781375044907211295, guid: 598fd52469bfbbd4abad0da67f307a03,
-        type: 3}
-      propertyPath: m_AutoBraking
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5781375044907211295, guid: 598fd52469bfbbd4abad0da67f307a03,
-        type: 3}
-      propertyPath: m_Acceleration
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 5781375044907211295, guid: 598fd52469bfbbd4abad0da67f307a03,
-        type: 3}
-      propertyPath: m_AngularSpeed
-      value: 200
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6717,11 +6692,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1996973602051950992, guid: 598fd52469bfbbd4abad0da67f307a03,
-        type: 3}
-      propertyPath: <PresenceRange>k__BackingField
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2273639706530526689, guid: 598fd52469bfbbd4abad0da67f307a03,
         type: 3}
       propertyPath: m_Name
@@ -6729,29 +6699,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4822652859342757205, guid: 598fd52469bfbbd4abad0da67f307a03,
         type: 3}
+      propertyPath: <Config>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: a0d4bdd31d8e4214488a6665a8a99c4e,
+        type: 2}
+    - target: {fileID: 4822652859342757205, guid: 598fd52469bfbbd4abad0da67f307a03,
+        type: 3}
       propertyPath: <Patrol>k__BackingField
       value: 
       objectReference: {fileID: 305413711}
-    - target: {fileID: 4879845702811214065, guid: 598fd52469bfbbd4abad0da67f307a03,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 25b27ea9c49c8a241b4edf550574fdf4, type: 2}
-    - target: {fileID: 5781375044907211295, guid: 598fd52469bfbbd4abad0da67f307a03,
-        type: 3}
-      propertyPath: m_AutoBraking
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5781375044907211295, guid: 598fd52469bfbbd4abad0da67f307a03,
-        type: 3}
-      propertyPath: m_Acceleration
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 5781375044907211295, guid: 598fd52469bfbbd4abad0da67f307a03,
-        type: 3}
-      propertyPath: m_AngularSpeed
-      value: 200
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
