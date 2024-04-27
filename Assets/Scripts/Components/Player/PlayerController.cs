@@ -29,6 +29,9 @@ public class PlayerController : BaseStateMachine<PlayerController.State> {
     public PlayerInput PlayerInput { get; private set; }
     public PlayerInputHandle Input { get; private set; }
     public Animator Animator { get; private set; }
+#if UNITY_EDITOR
+    public State _currentState;
+#endif
 
     // ====================== Variables ======================
     [field: NonSerialized] public bool Grounded { get; private set; } = true;
@@ -95,6 +98,10 @@ public class PlayerController : BaseStateMachine<PlayerController.State> {
         UpdateSensors();
 
         base.Update();
+#if UNITY_EDITOR
+        _currentState = ActiveState.Key;
+#endif
+
 
         ApplyGravity();
         ApplyMovement();
