@@ -29,7 +29,7 @@ public class PlayerControllerState_Jumping : PlayerControllerState {
 
 
     public override PlayerController.State NextState() {
-        if (Grounded) {
+        if (Grounded || Wet) {
             // If we requested to jump and are able to, stay in the state and run the logic
             if (Input.jump && CanJump) { 
                 Enter(); return Key;

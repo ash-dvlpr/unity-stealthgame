@@ -8,9 +8,9 @@ public class ResourceBar : MonoBehaviour {
 
     // ====================== References =====================
     [Header("Customization")]
-    [SerializeField] Color borderColor;
-    [SerializeField] Color backgroundColor;
-    [SerializeField] Color barColor;
+    [SerializeField] Color borderColor     = Color.gray;
+    [SerializeField] Color backgroundColor = Color.black;
+    [SerializeField] Color barColor        = Color.red;
 
     [Header("Configuration")]
     [SerializeField] Resource trackedResource;
@@ -56,7 +56,7 @@ public class ResourceBar : MonoBehaviour {
     }
 
     void UpdateGUI() {
-        if (barSlider && trackedResource) { 
+        if (barSlider && trackedResource) {
             var percent = trackedResource.Amount / (float) trackedResource.Max;
             barSlider.value = percent;
             if (showValues && displayText.enabled) {
@@ -68,10 +68,12 @@ public class ResourceBar : MonoBehaviour {
     // ================== Outside Facing API ==================
     public void Refresh() => UpdateGUI();
 
-    public void SwapTrackedResource(Resource newResource) {
+    public void SwapTrackedResource(Resource newResource = null) {
         if (trackedResource) trackedResource.OnChange -= OnResourceChanged;
+
         trackedResource = newResource;
-        trackedResource.OnChange += OnResourceChanged;
+        if (newResource) trackedResource.OnChange += OnResourceChanged;
+
         ReloadBar();
     }
 }
