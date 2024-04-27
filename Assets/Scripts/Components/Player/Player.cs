@@ -14,6 +14,7 @@ public class Player : MonoBehaviour {
 
     // ====================== Variables ======================
     public PlayerController PlayerController { get; private set; }
+    public Animator Animator => PlayerController.Animator;
     public Health HP => (Health) resources[typeof(Health)];
 
     // ===================== Unity Stuff =====================
@@ -25,10 +26,12 @@ public class Player : MonoBehaviour {
     }
 
     void OnEnable() {
+        HP.OnChange += OnHit;
         EventBus.Register(collectibleEvents);
     }
 
     void OnDisable() {
+        HP.OnChange -= OnHit;
         EventBus.Deregister(collectibleEvents);
     }
 
@@ -38,5 +41,9 @@ public class Player : MonoBehaviour {
         if (resources.TryGetValue(e.ResourceType, out var _resource)) {
             _resource.Add(e.collectible.Amount);
         }
+    }
+
+    void OnHit(Resource health) {
+        Animator.SetTrigger(AnimatorID.Hit);
     }
 }
