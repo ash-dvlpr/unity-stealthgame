@@ -31,6 +31,14 @@ MonoBehaviour:
     m_Key: btnCloseGame
     m_Metadata:
       m_Items: []
+  - m_Id: 1439912715034624
+    m_Key: btnPlayAgain
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1440084769579008
+    m_Key: btnMainMenu
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
