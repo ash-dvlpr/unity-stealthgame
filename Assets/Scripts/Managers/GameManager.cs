@@ -1,11 +1,12 @@
 using System;
 using UnityEngine;
 
-using CinderUtils.Events;
+using UnityEngine.SceneManagement;
 
 
-public class GameManager : MonoBehaviour {
-    public static GameManager Instance { get; private set; }
+public class GameManager : MonoBehaviourService<GameManager> {
+    public const int MAIN_MENU_SCENEID = 1;
+    public const int GAME_SCENEID = 2;
 
     // ======================= Events ========================
 
@@ -14,23 +15,14 @@ public class GameManager : MonoBehaviour {
     // ====================== Variables ======================
 
     // ===================== Unity Stuff =====================
-    void Awake() {
-        // Mantain a single Instance
-        if (Instance && Instance != this) DestroyImmediate(this);
-        // If there were no instance, initialize singleton
-        else {
-            DontDestroyOnLoad(this);
-            Instance = this;
-        }
-    }
-
-    void OnEnable() {
-    }
-
-    void OnDisable() {
-    }
-
     void Start() {
+        MenuManager.Init();
+        SceneManager.LoadScene(MAIN_MENU_SCENEID);
+        MenuManager.OpenMenu(MenuID.Main);
     }
 
+    // ===================== Custom Code =====================
+    public static void CloseGame() {
+        Application.Quit();
+    }
 }

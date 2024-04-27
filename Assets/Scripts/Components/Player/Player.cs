@@ -13,11 +13,13 @@ public class Player : MonoBehaviour {
     EventBinding<CollectibleEvent> collectibleEvents = new();
 
     // ====================== Variables ======================
-    Health HP => (Health) resources[typeof(Health)];
+    public PlayerController PlayerController { get; private set; }
+    public Health HP => (Health) resources[typeof(Health)];
 
     // ===================== Unity Stuff =====================
     void Awake() {
         GetComponents<Resource>().ForEach(r => resources.Add(r.GetType(), r));
+        PlayerController = GetComponent<PlayerController>();
 
         collectibleEvents.OnEvent += OnPickup;
     }

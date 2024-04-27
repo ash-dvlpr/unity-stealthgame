@@ -28,7 +28,7 @@ public class Gameplay : MonoBehaviour {
     [field: SerializeField] GameplayConfig Config;
 
     [Header("Player")]
-    [SerializeField] PlayerInput player;
+    [SerializeField] Player player;
 
     [Header("Collectibles")]
     [SerializeField] HealthPack healthPackPrefab;
@@ -41,12 +41,19 @@ public class Gameplay : MonoBehaviour {
     [Header("Game State")]
     [Disabled, SerializeField] float remainingTime = 0f;
     State gameState;
-
+    
     HashSet<int> objectiveIds = new();
     int remainingObjectives = 0;
 
     List<AIPatrol> enemyPatrols = new();
     int patrolOffset = 0;
+
+    // Player stuff
+    PlayerInput playerInput;
+    // Player GUI
+    PlayerGUI GUI;
+    ResourceBar playerHPBar;
+    
 
     int TotalObjectives { get => objectiveIds.Count; }
     int RemainingObjectives { get => remainingObjectives; }
@@ -54,6 +61,7 @@ public class Gameplay : MonoBehaviour {
     // ===================== Unity Stuff =====================
     void Awake() {
         gameplayEvents.OnEvent += OnGameplayEvent;
+
         Restore();
     }
 
@@ -63,6 +71,7 @@ public class Gameplay : MonoBehaviour {
 
     void OnDisable() {
         EventBus.Deregister(gameplayEvents);
+        playerHPBar?.SwapTrackedResource();
         StopAllCoroutines();
     }
 
@@ -75,7 +84,7 @@ public class Gameplay : MonoBehaviour {
             case State.NONE: {
                 if (Input.GetKeyDown(KeyCode.Return)) {
                     gameState = State.GAME_STARTED;
-                    player.enabled = true;
+                    playerInput.enabled = true;
                 }
                 break;
             }
@@ -101,9 +110,20 @@ public class Gameplay : MonoBehaviour {
 
     void RestartState() {
         StopAllCoroutines();
+
+        // Setup UI
+        playerHPBar = (GUI = (PlayerGUI) MenuManager.Get(MenuID.PlayerGUI)).HPBar;
+        playerHPBar.SwapTrackedResource(player.HP);
+
+        // Show UI
+        MenuManager.OpenMenu(MenuID.PlayerGUI);
+        
+        
+        // Reload stuff
+        playerInput = player.PlayerController.PlayerInput;
         gameState = State.NONE;
         remainingObjectives = TotalObjectives;
-        player.enabled = false;
+        playerInput.enabled = false;
         StartCoroutine(RotateEnemyPatrols());
     }
 
@@ -145,7 +165,7 @@ public class Gameplay : MonoBehaviour {
     void TriggerWin() {
         Debug.Log("VICTORY!");
         gameState = State.GAME_ENDED;
-        player.enabled = false;
+        playerInput.enabled = false;
 
         // Trigger win fireworks
         EventBus.Raise<CinematicEvent>(new() { id = CinematicID.VICTORY });
@@ -156,7 +176,7 @@ public class Gameplay : MonoBehaviour {
 
         Debug.Log("DEFEAT!");
         gameState = State.GAME_ENDED;
-        player.enabled = false;
+        playerInput.enabled = false;
 
         // TODO: Reload Scene
     }

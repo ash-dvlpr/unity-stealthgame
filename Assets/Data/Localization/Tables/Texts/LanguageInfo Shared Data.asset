@@ -19,6 +19,18 @@ MonoBehaviour:
     m_Key: name
     m_Metadata:
       m_Items: []
+  - m_Id: 1391351034376192
+    m_Key: changeLocale
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1392169330503680
+    m_Key: btnPlay
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1392172304265216
+    m_Key: btnCloseGame
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

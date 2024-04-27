@@ -22,6 +22,18 @@ MonoBehaviour:
     m_Localized: "Espa\xF1ol"
     m_Metadata:
       m_Items: []
+  - m_Id: 1391351034376192
+    m_Localized: Cambiar Idioma
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1392169330503680
+    m_Localized: Jugar
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1392172304265216
+    m_Localized: Salir
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

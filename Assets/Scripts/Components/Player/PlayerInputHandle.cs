@@ -9,7 +9,7 @@ public class PlayerInputHandle : MonoBehaviour {
     public bool analogMovement;
 
     [Header("Mouse Cursor Settings")]
-    public bool cursorLocked = true;
+    //public bool cursorLocked = true;
     public bool cursorInputForLook = true;
 
     // ====================== Variables ======================
@@ -21,9 +21,9 @@ public class PlayerInputHandle : MonoBehaviour {
 
     
     // ===================== Unity Stuff =====================
-    private void OnApplicationFocus(bool hasFocus) {
-        Cursor.lockState = cursorLocked ? CursorLockMode.Locked : CursorLockMode.None;
-    }
+    //private void OnApplicationFocus(bool hasFocus) {
+    //    Cursor.lockState = cursorLocked ? CursorLockMode.Locked : CursorLockMode.None;
+    //}
 
     public void OnMove(InputValue value) {
         move = value.Get<Vector2>();
