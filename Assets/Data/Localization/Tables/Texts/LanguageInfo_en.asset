@@ -34,6 +34,14 @@ MonoBehaviour:
     m_Localized: Exit
     m_Metadata:
       m_Items: []
+  - m_Id: 1439912715034624
+    m_Localized: Play Again
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1440084769579008
+    m_Localized: Main Menu
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
