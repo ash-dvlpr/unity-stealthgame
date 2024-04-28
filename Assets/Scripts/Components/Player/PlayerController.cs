@@ -38,7 +38,7 @@ public class PlayerController : BaseStateMachine<PlayerController.State> {
     [field: NonSerialized] public bool Wet { get; private set; } = false;
     public bool OnJumpCooldown => JumpCooldownTimer > 0f; // TODO: Update timer
     public bool OnFallCooldown => false; // TODO: timer
-    public bool CanJump => Grounded && !Wet;
+    public bool CanJump => Grounded;// && !Wet;
 
     bool IsCurrentDeviceMouse => PlayerInput.currentControlScheme == "KeyboardMouse";
 
@@ -129,7 +129,7 @@ public class PlayerController : BaseStateMachine<PlayerController.State> {
 
     private void OnFootstep(AnimationEvent animationEvent) {
         if (animationEvent.animatorClipInfo.weight > 0.5f) {
-            var clip = Config.FootstepAudioClips.GetRandom();
+            var clip = Wet ? Config.WetFootstepAudioClips.GetRandom(): Config.FootstepAudioClips.GetRandom();
 
             if (clip) AudioSource.PlayClipAtPoint(
                 clip, transform.TransformPoint(CharacterController.center), Config.FootstepAudioVolume

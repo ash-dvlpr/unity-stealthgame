@@ -10,4 +10,5 @@ public static class AnimatorID {
     public static readonly int FreeFall = Animator.StringToHash("FreeFall");
     public static readonly int Grounded = Animator.StringToHash("Grounded");
     public static readonly int Wet = Animator.StringToHash("Wet");
+    public static readonly int Hit = Animator.StringToHash("Hit");
 }

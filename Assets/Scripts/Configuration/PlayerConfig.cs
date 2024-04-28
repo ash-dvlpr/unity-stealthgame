@@ -33,7 +33,13 @@ public class PlayerConfig : ScriptableObject {
     [field: Tooltip("Run speed of the character in m/s")]
     [field: SerializeField, Min(0)] public float RunSpeed { get; private set; } = 5.335f;
     [field: Tooltip("Acceleration and deceleration")]
+    [field: SerializeField, Range(0, 1)] public float WetSpeedModifier { get; private set; } = 0.75f;
     [field: SerializeField, Min(0)] public float Acceleration { get; private set; } = 10.0f;
+    public float WetWalkSpeed => WalkSpeed * WetSpeedModifier;
+    public float WetRunSpeed => RunSpeed * WetSpeedModifier;
+        
+
+
 
     [field: Header("Jumping")]
     [field: Tooltip("The height the player can jump")]
@@ -51,6 +57,7 @@ public class PlayerConfig : ScriptableObject {
     [field: Header("Audio")]
     [field: SerializeField] public AudioClip LandingAudioClip { get; private set; }
     [field: SerializeField] public AudioClip[] FootstepAudioClips { get; private set; }
+    [field: SerializeField] public AudioClip[] WetFootstepAudioClips { get; private set; }
     [field: SerializeField, Range(0, 1)] public float FootstepAudioVolume { get; private set; } = 0.5f;
 
 
