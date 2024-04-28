@@ -16,6 +16,7 @@ MonoBehaviour:
   LowerVerticalLimit: -30
   <WalkSpeed>k__BackingField: 2
   <RunSpeed>k__BackingField: 5.335
+  <WetSpeedModifier>k__BackingField: 0.7
   <Acceleration>k__BackingField: 10
   <JumpHeight>k__BackingField: 1.2
   <Gravity>k__BackingField: -15
@@ -39,4 +40,12 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 67c8b33e424ccdc4486edf538ab91c5a, type: 3}
   - {fileID: 8300000, guid: 274649b0e221539409070ebf6c18918b, type: 3}
   - {fileID: 8300000, guid: a3194b8bbc96ef84fab1f98f4b7dae3e, type: 3}
+  <WetFootstepAudioClips>k__BackingField:
+  - {fileID: 8300000, guid: 17cff20a090300444ac528ef80b8afa9, type: 3}
+  - {fileID: 8300000, guid: 3cb22699b85dcfb4eacaeff52a9f8cf9, type: 3}
+  - {fileID: 8300000, guid: 51dd50cca41aac44ca29f946293935f7, type: 3}
+  - {fileID: 8300000, guid: c107f81b545c531458d9edf4034ed989, type: 3}
+  - {fileID: 8300000, guid: ac4b156e9c6fed445b84a365f398b8aa, type: 3}
+  - {fileID: 8300000, guid: aee6856285c14cb43a7871ff9905ea8c, type: 3}
+  - {fileID: 8300000, guid: d9ebe3c1a069f31468c6b2e460910f83, type: 3}
   <FootstepAudioVolume>k__BackingField: 0.5

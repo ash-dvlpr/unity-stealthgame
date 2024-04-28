@@ -11,15 +11,17 @@ public class PlayerControllerState_Moving : PlayerControllerState {
 
     // ===================== Custom Code =====================
     public override void Tick() {
-        // Set target speed based on if sprint is pressed
-        Context.TargetSpeed = Input.sprint ? Config.RunSpeed : Config.WalkSpeed;
+        // Set target speed based on if sprint is pressed and if it's on water
+        Context.TargetSpeed = Context.Wet
+            ? Input.sprint ? Config.WetRunSpeed : Config.WetWalkSpeed
+            : Input.sprint ? Config.RunSpeed : Config.WalkSpeed;
 
         // If there are no inputs, the speed is none
         if (Input.move == Vector2.zero) Context.TargetSpeed = 0.0f;
 
         // Calculate the new rotation
         Vector2 inputDirection = Input.move.normalized;
-        Context.TargetRotation = Mathf.Atan2(inputDirection.x, inputDirection.y) 
+        Context.TargetRotation = Mathf.Atan2(inputDirection.x, inputDirection.y)
             * Mathf.Rad2Deg + Context.MainCamera.transform.eulerAngles.y;
     }
 
