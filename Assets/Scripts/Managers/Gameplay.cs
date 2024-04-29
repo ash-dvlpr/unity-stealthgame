@@ -13,7 +13,7 @@ using CinderUtils.Extensions;
 
 
 
-
+[RequireComponent(typeof(RemainingTime))]
 public class Gameplay : MonoBehaviour {
     public enum State : byte {
         NONE            = 0,
@@ -38,12 +38,11 @@ public class Gameplay : MonoBehaviour {
     [SerializeField] List<EnemyAI> enemies = new();
 
     // ====================== Variables ======================
-    [Header("Game State")]
-    [Disabled, SerializeField] float remainingTime = 0f;
+    RemainingTime remainingTime;
     State gameState;
 
     HashSet<int> objectiveIds = new();
-    int remainingObjectives = 0;
+    int _remainingObjectives = 0;
 
     List<AIPatrol> enemyPatrols = new();
     int patrolOffset = 0;
@@ -54,14 +53,21 @@ public class Gameplay : MonoBehaviour {
     PlayerGUI GUI;
     GameOverMenu gameOverUI;
     ResourceBar playerHPBar;
-
+    ResourceBar remainingTimeBar;
 
     int TotalObjectives { get => objectiveIds.Count; }
-    int RemainingObjectives { get => remainingObjectives; }
+    int RemainingObjectives { 
+        get => _remainingObjectives;
+        set {
+            GUI.UpdateRemainingIbjectives(value);
+            _remainingObjectives = value;
+        }
+    }
 
     // ===================== Unity Stuff =====================
     void Awake() {
         gameplayEvents.OnEvent += OnGameplayEvent;
+        remainingTime = GetComponent<RemainingTime>();
 
         Restore();
     }
@@ -73,6 +79,7 @@ public class Gameplay : MonoBehaviour {
     void OnDisable() {
         EventBus.Deregister(gameplayEvents);
         playerHPBar?.SwapTrackedResource();
+        remainingTimeBar?.SwapTrackedResource();
         StopAllCoroutines();
     }
 
@@ -82,7 +89,7 @@ public class Gameplay : MonoBehaviour {
 
     void Update() {
         if (gameState == State.GAME_STARTED) {
-            remainingTime -= Time.deltaTime;
+            remainingTime.Tick();
             CheckWinCondition();
         }
     }
@@ -90,7 +97,7 @@ public class Gameplay : MonoBehaviour {
     // ===================== Custom Code =====================
     void Restore() {
         objectiveIds.Clear();
-        remainingTime = Config.SecondsMaxTime;
+        remainingTime.SetMax(Config.SecondsMaxTime);
         InitEnemyPatrols();
     }
 
@@ -98,12 +105,18 @@ public class Gameplay : MonoBehaviour {
         StopAllCoroutines();
 
         // Setup UI
+        GUI = (PlayerGUI) MenuManager.Get(MenuID.PlayerGUI);
         gameOverUI = (GameOverMenu) MenuManager.Get(MenuID.GameOverUI);
-        playerHPBar = ( GUI = (PlayerGUI) MenuManager.Get(MenuID.PlayerGUI) ).HPBar;
+        
+        playerHPBar = GUI.HPBar;
+        remainingTimeBar = GUI.TimeBar;
+
         playerHPBar.SwapTrackedResource(player.HP);
+        remainingTimeBar.SwapTrackedResource(remainingTime);
 
         // Setup Events
         player.HP.OnDeath += TriggerDefeat;
+        remainingTime.OnTimesUp += TriggerDefeat;
 
         // Show UI
         MenuManager.OpenMenu(MenuID.PlayerGUI);
@@ -111,7 +124,7 @@ public class Gameplay : MonoBehaviour {
         // Reload stuff
         playerInput = player.PlayerController.PlayerInput;
         gameState = State.NONE;
-        remainingObjectives = TotalObjectives;
+        RemainingObjectives = TotalObjectives;
 
         // Start stuff
         gameState = State.GAME_STARTED;
@@ -134,9 +147,9 @@ public class Gameplay : MonoBehaviour {
                 // Verify the objective
                 if (objectiveIds.Contains(e.id)) {
                     // Decrease the number of remaining objectives
-                    remainingObjectives--;
+                    RemainingObjectives--;
                     // Give back some time to the player
-                    remainingTime += Config.SecondsPerObjective;
+                    remainingTime.Add(Config.SecondsPerObjective);
                     // Spawn a HealthPack
                     SpawnHeathPack();
                 }
@@ -148,9 +161,7 @@ public class Gameplay : MonoBehaviour {
     }
 
     void CheckWinCondition() {
-        //Debug.Log($"{RemainingObjectives}/{TotalObjectives}");
         if (RemainingObjectives == 0) TriggerWin();
-        else if (remainingTime <= float.Epsilon) TriggerDefeat();
     }
 
     void TriggerWin() {

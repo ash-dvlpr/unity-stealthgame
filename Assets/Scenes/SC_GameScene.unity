@@ -1455,6 +1455,7 @@ GameObject:
   m_Component:
   - component: {fileID: 417812084}
   - component: {fileID: 417812085}
+  - component: {fileID: 417812086}
   m_Layer: 0
   m_Name: Gameplay
   m_TagString: Untagged
@@ -1502,7 +1503,20 @@ MonoBehaviour:
   enemies:
   - {fileID: 865552067}
   - {fileID: 1355447518}
-  remainingTime: 0
+--- !u!114 &417812086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417812083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1291a8813f45b3c4da825040f4f017fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Max>k__BackingField: 1
+  _amount: 1
 --- !u!1001 &486205096
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6693,14 +6707,14 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1815336406}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &1919504085
-MeshCollider:
+--- !u!136 &1919504085
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1919504081}
-  m_Material: {fileID: 13400000, guid: a857868913ae1584c9d1e9e49666f833, type: 2}
+  m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -6711,10 +6725,11 @@ MeshCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 2426508734089713321, guid: 02766ee54669cf242b05e1fb91e587ea, type: 3}
+  serializedVersion: 2
+  m_Radius: 0.011287313
+  m_Height: 0.022
+  m_Direction: 2
+  m_Center: {x: 0.0012762801, y: -0.0015153114, z: -0.0004312466}
 --- !u!1001 &1921581383
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7934,6 +7949,7 @@ Transform:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 349793913}
   - {fileID: 417812084}
   - {fileID: 835576103}
   - {fileID: 823080718}
@@ -7943,4 +7959,3 @@ SceneRoots:
   - {fileID: 1715702119}
   - {fileID: 774296726}
   - {fileID: 590606894}
-  - {fileID: 349793913}

@@ -12,9 +12,9 @@ public class PlayerGUI : AMenu {
 
     // ====================== References =====================
     [field: SerializeField] public ResourceBar HPBar { get; private set; }
+    [field: SerializeField] public ResourceBar TimeBar { get; private set; }
 
-    //[field: SerializeField] public TMP_Text RoundDisplay { get; private set; }
-    //[field: SerializeField] public TMP_Text RemainingEnemyCountDisplay { get; private set; }
+    [field: SerializeField] public TMP_Text RemainingObjectivesDisplay { get; private set; }
 
     // ===================== Custom Code =====================
 
@@ -33,6 +33,8 @@ public class PlayerGUI : AMenu {
         base.CloseMenu();
     }
 
-    // ===================== UI Actions ======================
+    public void UpdateRemainingIbjectives(int remaining) {
+        RemainingObjectivesDisplay.text = $"X {remaining}";
+    }
 
 }
