@@ -21,7 +21,7 @@ public abstract class Resource : MonoBehaviour {
 
     // ==================== Configuration ====================
     [field: Header("Configuration")]
-    [field: SerializeField, Min(1)] public float Max { get; private set; }
+    [field: SerializeField, Min(1)] public float Max { get; protected set; }
 
     /// <value>
     /// Determines the behaviour of the <see cref="Reset">Reset()</see> method.

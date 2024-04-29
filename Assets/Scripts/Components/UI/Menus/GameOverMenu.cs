@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 public class GameOverMenu : AMenu {
     public override MenuID MenuKey { get => MenuID.GameOverUI; }
 
-    // ==================== Configuration ====================
+    // ====================== References =====================
     [SerializeField] GameObject victoryText;
     [SerializeField] GameObject gameOverText;
 
