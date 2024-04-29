@@ -1,7 +1,6 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class EnemyAIState_Patrol : EnemyAIState {
     // ====================== Variables ======================
@@ -19,6 +18,8 @@ public class EnemyAIState_Patrol : EnemyAIState {
         
         RestartSequence();
         CyclePatrol();
+
+        Context.NotifyPlayerLost();
     }
     public override void Exit() {
         CurrentTarget = Context.transform;

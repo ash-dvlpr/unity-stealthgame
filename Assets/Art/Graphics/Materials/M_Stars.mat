@@ -31,7 +31,7 @@ Material:
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap:
     RenderType: Transparent
   disabledShaderPasses:
@@ -114,6 +114,7 @@ Material:
     - _DstBlend: 10
     - _DstBlendAlpha: 10
     - _EnvironmentReflections: 1
+    - _ExternalTime: 0
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -129,10 +130,11 @@ Material:
     - _SpecularHighlights: 1
     - _SrcBlend: 5
     - _SrcBlendAlpha: 1
-    - _StarDensity: 200
+    - _StarDensity: 600
     - _StarPower: 25
-    - _StarSaturation: 0.1
-    - _StarTransparency: 0.97777814
+    - _StarSaturation: 0.07
+    - _StarTransparency: 1
+    - _Star_Speed: 0.001
     - _Surface: 1
     - _WorkflowMode: 1
     - _ZTest: 4

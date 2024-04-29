@@ -1,6 +1,5 @@
+using System;
 using System.Linq;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyAIState_Chase : EnemyAIState {
@@ -16,6 +15,8 @@ public class EnemyAIState_Chase : EnemyAIState {
         if (Context.FOV.SeenAny) { 
             CurrentTarget = Context.FOV.VisibleTargets.First();
         }
+
+        Context.NotifyPlayerDetected();
     }
 
     public override void Tick() {

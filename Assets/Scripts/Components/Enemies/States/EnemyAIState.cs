@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
+using System;
 using UnityEngine;
-using UnityEngine.AI;
 
 public abstract class EnemyAIState : BaseState<EnemyAI.EState> {
     protected EnemyAIState(EnemyAI context) {
@@ -55,9 +52,15 @@ public abstract class EnemyAIState : BaseState<EnemyAI.EState> {
     }
 
     protected void ApplyConfig() {
-        Context.FOV.DetectionMode = StateConfig.DetectionMode;
+        if (StateConfig.State != 0) {
+            // Navigation
+            Context.Agent.speed = StateConfig.WalkSpeed;
+            Context.Agent.stoppingDistance = StateConfig.StoppingDistance;
 
-        Context.Agent.speed = StateConfig.WalkSpeed;
-        Context.Agent.stoppingDistance = StateConfig.StoppingDistance;
+            // Sensing
+            Context.FOV.Range = StateConfig.ViewRange;
+            Context.FOV.ViewAngle = StateConfig.ViewAngle;
+            Context.FOV.DetectionMode = StateConfig.DetectionMode;
+        }
     }
 }

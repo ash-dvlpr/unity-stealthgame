@@ -1,13 +1,13 @@
 {
   "dependencies": {
     "com.ash-dvlpr.cinder-utils": {
-      "version": "https://github.com/ash-dvlpr/cinder-utils.git#v1.1.1",
+      "version": "https://github.com/ash-dvlpr/cinder-utils.git#v1.1.2",
       "depth": 0,
       "source": "git",
       "dependencies": {
         "com.coffee.upm-git-extension": "git://github.com/mob-sakai/UpmGitExtension.git"
       },
-      "hash": "dd2e695e53294ae8e43791e74666cb278259b5bf"
+      "hash": "d23be687960b4524d8f29d1fd6b22e8c849a069e"
     },
     "com.coffee.upm-git-extension": {
       "version": "https://github.com/mob-sakai/UpmGitExtension.git",
@@ -15,6 +15,20 @@
       "source": "git",
       "dependencies": {},
       "hash": "8fc54a2cdf0c2169dd26852ea0fe202e11158f43"
+    },
+    "com.unity.addressables": {
+      "version": "1.21.18",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.scriptablebuildpipeline": "1.21.20",
+        "com.unity.modules.assetbundle": "1.0.0",
+        "com.unity.modules.imageconversion": "1.0.0",
+        "com.unity.modules.jsonserialize": "1.0.0",
+        "com.unity.modules.unitywebrequest": "1.0.0",
+        "com.unity.modules.unitywebrequestassetbundle": "1.0.0"
+      },
+      "url": "https://packages.unity.com"
     },
     "com.unity.ai.navigation": {
       "version": "1.1.5",
@@ -91,8 +105,25 @@
       },
       "url": "https://packages.unity.com"
     },
+    "com.unity.localization": {
+      "version": "1.4.5",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.addressables": "1.21.8",
+        "com.unity.nuget.newtonsoft-json": "3.0.2"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.mathematics": {
       "version": "1.2.6",
+      "depth": 1,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.nuget.newtonsoft-json": {
+      "version": "3.2.1",
       "depth": 1,
       "source": "registry",
       "dependencies": {},
@@ -119,6 +150,13 @@
         "com.unity.render-pipelines.core": "14.0.9",
         "com.unity.shadergraph": "14.0.9"
       }
+    },
+    "com.unity.scriptablebuildpipeline": {
+      "version": "1.21.20",
+      "depth": 2,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
     },
     "com.unity.searcher": {
       "version": "4.9.2",

@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: GameTexts_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: f8ffde82473e8b141982f6dab4f543fe, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 59184345088
+    m_Localized: Play
+    m_Metadata:
+      m_Items: []
+  - m_Id: 84308226048
+    m_Localized: Play Again
+    m_Metadata:
+      m_Items: []
+  - m_Id: 397706620928
+    m_Localized: Main Menu
+    m_Metadata:
+      m_Items: []
+  - m_Id: 713705484288
+    m_Localized: Exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2305523544064
+    m_Localized: Game Over
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2385928351744
+    m_Localized: Victory
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2836769894400
+    m_Localized: Credits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2901940989952
+    m_Localized: "Programmer - Aser Granado Amores\nArtist - Luis Arenas S\xE1nchez\nTeam
+      Leader - Sergio Blanco Prieto\nCharacters - Mixamo\nMusic - pixabay.com\nSounds
+      - elements.envato.com\nTresures - sketchfab.com"
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []

@@ -1,7 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using Unity.Collections;
 using UnityEngine;
 
 using CinderUtils.Attributes;
@@ -11,7 +8,7 @@ using CinderUtils.Attributes;
 /// Generic abstract resource component.
 /// </summary>
 public abstract class Resource : MonoBehaviour {
-    public enum ResourceType : byte {
+    public enum ResourceKind : byte {
         /// <summary>
         /// <see cref="Amount">Amount</see> will start off at it's <see cref="Max">Max</see> value.
         /// </summary>
@@ -24,12 +21,12 @@ public abstract class Resource : MonoBehaviour {
 
     // ==================== Configuration ====================
     [field: Header("Configuration")]
-    [field: SerializeField, Min(1)] public float Max { get; private set; }
+    [field: SerializeField, Min(1)] public float Max { get; protected set; }
 
     /// <value>
     /// Determines the behaviour of the <see cref="Reset">Reset()</see> method.
     /// </value>
-    public abstract ResourceType ResType { get; }
+    public abstract ResourceKind Kind { get; }
 
     // ====================== Variables ======================
     [SerializeField, Disabled] private float _amount;
@@ -60,23 +57,28 @@ public abstract class Resource : MonoBehaviour {
     void Reset() {
         Max = Math.Max(1, Max);
 
-        switch (ResType) {
-            case ResourceType.Scarse:
+        switch (Kind) {
+            case ResourceKind.Scarse:
                 Amount = 0; break;
-            case ResourceType.Plentiful:
+            case ResourceKind.Plentiful:
                 Amount = Max; break;
             default:
-                throw new NotImplementedException($"'Resource.Reset()': Missing implementation for enum variant: '{ResType}'");
+                throw new NotImplementedException($"'Resource.Reset()': Missing implementation for enum variant: '{Kind}'");
         }
     }
 
     // ================== Outside Facing API =================
-    public event Action<Resource> OnChange;
+    public event Action<float, float> OnChange;
     protected virtual void TriggerOnChange(float prev, float next) { 
-        OnChange?.Invoke(this);
+        OnChange?.Invoke(prev, next);
     }
+
 
     public void ResetValues() {
         Reset();
+    }
+
+    public void Add(float amount) {
+        Amount += amount;
     }
 }

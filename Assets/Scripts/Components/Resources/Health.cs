@@ -1,12 +1,10 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 
 public class Health : Resource {
     // ==================== Configuration ====================
-    public override ResourceType ResType => ResourceType.Plentiful;
+    public override ResourceKind Kind => ResourceKind.Plentiful;
 
     // ====================== Variables ======================
     public bool IsAlive => Amount > 0;
@@ -22,11 +20,11 @@ public class Health : Resource {
 
     // ================== Outside Facing API =================
     public event Action OnDeath;
+    public event Action OnHit;
     protected override void TriggerOnChange(float prev, float next) {
         base.TriggerOnChange(prev, next);
 
-        if (Amount.Equals(0)) {
-            OnDeath?.Invoke();
-        }
+        if (prev > next) OnHit?.Invoke();
+        if (next.Equals(0)) OnDeath?.Invoke();
     }
 }

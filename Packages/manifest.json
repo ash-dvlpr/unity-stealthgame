@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "com.ash-dvlpr.cinder-utils": "https://github.com/ash-dvlpr/cinder-utils.git#v1.1.1",
+    "com.ash-dvlpr.cinder-utils": "https://github.com/ash-dvlpr/cinder-utils.git#v1.1.2",
     "com.coffee.upm-git-extension": "https://github.com/mob-sakai/UpmGitExtension.git",
     "com.unity.ai.navigation": "1.1.5",
     "com.unity.cinemachine": "2.10.0",
@@ -9,6 +9,7 @@
     "com.unity.ide.visualstudio": "2.0.21",
     "com.unity.ide.vscode": "1.2.5",
     "com.unity.inputsystem": "1.7.0",
+    "com.unity.localization": "1.4.5",
     "com.unity.render-pipelines.core": "14.0.9",
     "com.unity.render-pipelines.universal": "14.0.9",
     "com.unity.test-framework": "1.1.33",

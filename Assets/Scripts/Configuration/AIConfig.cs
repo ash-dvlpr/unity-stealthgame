@@ -1,18 +1,21 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "CFG_AI", menuName = "Configuration/EnemyAI Config", order = 2)]
+[CreateAssetMenu(fileName = "CFG_AI", menuName = "Configuration/EnemyAI Config", order = 3)]
 public class AIConfig : ScriptableObject {
     // ==================== Configurations ===================
     [Serializable]
     public struct StateConfig {
-        [SerializeField] internal EnemyAI.EState State;
+        [SerializeField] public EnemyAI.EState State;
+        [Header("Navigation")]
+        [SerializeField, Min(0)] public float WalkSpeed;
+        [SerializeField, Min(1)] public float StoppingDistance;
+        [Header("Senses")]
         [SerializeField] public FieldOfView.EDetectionMode DetectionMode;
-        [SerializeField] public float WalkSpeed;
-        [SerializeField] public float StoppingDistance;
+        [SerializeField, Range(0, 360)] public float ViewAngle;
+        [SerializeField, Min(0)] public float ViewRange;
 
         public override string ToString() {
             return JsonUtility.ToJson(this);
@@ -38,6 +41,6 @@ public class AIConfig : ScriptableObject {
         }
     }
     public StateConfig this[EnemyAI.EState key] {
-        get { return ConfigsDict[key]; }
+        get => ConfigsDict.TryGetValue(key, out var value) ? value : default;
     }
 }

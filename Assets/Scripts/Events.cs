@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 
 using CinderUtils.Events;
 
@@ -12,12 +10,23 @@ public struct GameplayEvent : IEvent {
 }
 
 public enum EventMetadata : byte {
-    NONE        = 0,
-    SETUP       = 1,
-    OBJECTIVE   = 2,
-    COLLECTIBLE = 3,
-    TRIGGER     = 4,
+    NONE                = 0,
+    OBJECTIVE_SETUP     = 1,
+    OBJECTIVE_COMPLETED = 2,
+    PLAYER_DETECTED     = 3,
+    PLAYER_LOST         = 4,
 }
+
+
+
+
+// Collectiles Events
+public struct CollectibleEvent : IEvent {
+    public Type ResourceType => collectible.ResourceType;
+    public ICollectible<Resource> collectible;
+}
+
+
 
 
 // Events for cinematic stuff
@@ -30,6 +39,8 @@ public enum CinematicID : byte {
     VICTORY     = 1,
     DEFEAT      = 2,
 }
+
+
 
 
 // Events for cinematic stuff

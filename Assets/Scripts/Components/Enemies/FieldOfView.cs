@@ -16,9 +16,9 @@ public class FieldOfView : MonoBehaviour {
 
     // ==================== Configuration ====================
     [field: SerializeField] public Transform EyeTransform { get; private set; }
-    [field: SerializeField, Range(0, 360)] public float ViewAngle { get; private set; }
-    [field: SerializeField, Min(0)] public float Range { get; private set; }
-    [field: SerializeField, Min(0)] public float PresenceRange { get; private set; }
+    [field: SerializeField, Range(0, 360)] public float ViewAngle { get; set; }
+    [field: SerializeField, Min(0)] public float Range { get; set; }
+    [field: SerializeField, Min(0)] public float PresenceRange { get; set; }
     [field: SerializeField] public EDetectionMode DetectionMode { get; set; }
     [field: SerializeField] public LayerMask TargetMask { get; private set; }
     [field: SerializeField] public LayerMask ObstacleMask { get; private set; }
@@ -26,6 +26,7 @@ public class FieldOfView : MonoBehaviour {
     // ====================== Variables ======================
     public bool SeenAny => !VisibleTargets.NullOrEmpty();
     public readonly List<Transform> VisibleTargets = new();
+    public Func<GameObject, bool> filter = (_) => true;
 
     public Collider[] TargetsInPresenceRange { get; private set; }
     public Collider[] TargetsInRange { get; private set; }
@@ -62,12 +63,14 @@ public class FieldOfView : MonoBehaviour {
             Transform target = targetCollider.transform;
 
             // If it's on the presence range, add it to the list.
-            if (TargetsInPresenceRange.Contains(targetCollider)) {
-                VisibleTargets.Add(target);
-            }
-            // If it's visible, add it to the list.
-            else if (TargetIsVisible(targetCollider.bounds.center)) {
-                VisibleTargets.Add(target);
+            if (filter(targetCollider.gameObject)) { 
+                if (TargetsInPresenceRange.Contains(targetCollider)) {
+                    VisibleTargets.Add(target);
+                }
+                // If it's visible, add it to the list.
+                else if (TargetIsVisible(targetCollider.bounds.center)) {
+                    VisibleTargets.Add(target);
+                }
             }
         }
     }
