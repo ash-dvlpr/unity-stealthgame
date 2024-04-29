@@ -19,27 +19,23 @@ MonoBehaviour:
     m_Items: []
   m_TableData:
   - m_Id: 13847124078592
-    m_Localized: English
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1391351034376192
     m_Localized: Change Language
-    m_Metadata:
-      m_Items: []
-  - m_Id: 1392169330503680
-    m_Localized: Play
     m_Metadata:
       m_Items: []
   - m_Id: 1392172304265216
     m_Localized: Exit
     m_Metadata:
       m_Items: []
-  - m_Id: 1439912715034624
-    m_Localized: Play Again
+  - m_Id: 2046125304016896
+    m_Localized: English
     m_Metadata:
       m_Items: []
-  - m_Id: 1440084769579008
-    m_Localized: Main Menu
+  - m_Id: 2050742230282240
+    m_Localized: English
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2050786970923008
+    m_Localized: "Ingl\xE9s"
     m_Metadata:
       m_Items: []
   references:

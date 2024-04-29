@@ -41,7 +41,7 @@ public class Gameplay : MonoBehaviour {
     [Header("Game State")]
     [Disabled, SerializeField] float remainingTime = 0f;
     State gameState;
-    
+
     HashSet<int> objectiveIds = new();
     int remainingObjectives = 0;
 
@@ -52,8 +52,9 @@ public class Gameplay : MonoBehaviour {
     PlayerInput playerInput;
     // Player GUI
     PlayerGUI GUI;
+    GameOverMenu gameOverUI;
     ResourceBar playerHPBar;
-    
+
 
     int TotalObjectives { get => objectiveIds.Count; }
     int RemainingObjectives { get => remainingObjectives; }
@@ -80,27 +81,12 @@ public class Gameplay : MonoBehaviour {
     }
 
     void Update() {
-        switch (gameState) {
-            case State.NONE: {
-                if (Input.GetKeyDown(KeyCode.Return)) {
-                    gameState = State.GAME_STARTED;
-                    playerInput.enabled = true;
-                }
-                break;
-            }
-            case State.GAME_ENDED: {
-                if (Input.GetKeyDown(KeyCode.Return)) {
-                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-                }
-                break;
-            }
-            case State.GAME_STARTED: {
-                remainingTime -= Time.deltaTime;
-                CheckWinCondition();
-                break;
-            }
+        if (gameState == State.GAME_STARTED) {
+            remainingTime -= Time.deltaTime;
+            CheckWinCondition();
         }
     }
+
     // ===================== Custom Code =====================
     void Restore() {
         objectiveIds.Clear();
@@ -112,18 +98,23 @@ public class Gameplay : MonoBehaviour {
         StopAllCoroutines();
 
         // Setup UI
-        playerHPBar = (GUI = (PlayerGUI) MenuManager.Get(MenuID.PlayerGUI)).HPBar;
+        gameOverUI = (GameOverMenu) MenuManager.Get(MenuID.GameOverUI);
+        playerHPBar = ( GUI = (PlayerGUI) MenuManager.Get(MenuID.PlayerGUI) ).HPBar;
         playerHPBar.SwapTrackedResource(player.HP);
+
+        // Setup Events
+        player.HP.OnDeath += TriggerDefeat;
 
         // Show UI
         MenuManager.OpenMenu(MenuID.PlayerGUI);
-        
-        
+
         // Reload stuff
         playerInput = player.PlayerController.PlayerInput;
         gameState = State.NONE;
         remainingObjectives = TotalObjectives;
-        playerInput.enabled = false;
+
+        // Start stuff
+        gameState = State.GAME_STARTED;
         StartCoroutine(RotateEnemyPatrols());
     }
 
@@ -163,22 +154,22 @@ public class Gameplay : MonoBehaviour {
     }
 
     void TriggerWin() {
-        Debug.Log("VICTORY!");
         gameState = State.GAME_ENDED;
         playerInput.enabled = false;
 
         // Trigger win fireworks
         EventBus.Raise<CinematicEvent>(new() { id = CinematicID.VICTORY });
+
+        gameOverUI.GameOverText(false);
+        MenuManager.OpenMenu(MenuID.GameOverUI);
     }
 
     void TriggerDefeat() {
-        StopAllCoroutines();
-
-        Debug.Log("DEFEAT!");
         gameState = State.GAME_ENDED;
         playerInput.enabled = false;
 
-        // TODO: Reload Scene
+        gameOverUI.GameOverText(true);
+        MenuManager.OpenMenu(MenuID.GameOverUI);
     }
 
     void SpawnHeathPack() {

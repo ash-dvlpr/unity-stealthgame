@@ -12,7 +12,7 @@ public enum MenuID : int {
     None       = 0,
     Main       = 1,
     //Settings   = 2,
-    Credits    = 3,
+    //Credits    = 3,
     //Pause      = 4,
     PlayerGUI  = 5,
     GameOverUI = 7,
@@ -57,7 +57,7 @@ public class MenuManager : MonoBehaviourService<MenuManager> {
     }
 
     public static void ResetSelectedUIObject(GameObject newSelected = null) {
-        EventSystem.current.SetSelectedGameObject(newSelected);
+        EventSystem.current?.SetSelectedGameObject(newSelected);
     }
 
     /// <summary>

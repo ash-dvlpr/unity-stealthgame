@@ -26,9 +26,6 @@ public class MainMenu : AMenu {
         SceneManager.LoadScene(GameManager.GAME_SCENEID);
         MenuManager.OpenMenu(MenuID.PlayerGUI);
     }
-    public void OnClick_Credits() {
-        MenuManager.OpenMenu(MenuID.Credits);
-    }
     public void OnClick_CloseGame() {
         GameManager.CloseGame();
     }
