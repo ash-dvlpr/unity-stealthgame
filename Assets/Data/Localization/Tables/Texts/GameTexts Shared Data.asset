@@ -10,36 +10,52 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
-  m_Name: LanguageInfo Shared Data
+  m_Name: GameTexts Shared Data
   m_EditorClassIdentifier: 
-  m_TableCollectionName: LanguageInfo
-  m_TableCollectionNameGuidString: b81f6a15f3d7d194a9aa42cac9ab2a2e
+  m_TableCollectionName: GameTexts
+  m_TableCollectionNameGuidString: f8ffde82473e8b141982f6dab4f543fe
   m_Entries:
-  - m_Id: 2046125304016896
-    m_Key: name
+  - m_Id: 59184345088
+    m_Key: btnPlay
     m_Metadata:
       m_Items: []
-  - m_Id: 13847124078592
-    m_Key: txtChangeLocale
+  - m_Id: 84308226048
+    m_Key: btnPlayAgain
     m_Metadata:
       m_Items: []
-  - m_Id: 2050742230282240
-    m_Key: langEnglish
+  - m_Id: 397706620928
+    m_Key: btnMainMenu
     m_Metadata:
       m_Items: []
-  - m_Id: 2050786970923008
-    m_Key: langSpanish
+  - m_Id: 713705484288
+    m_Key: btnExit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2305523544064
+    m_Key: txtGameOver
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2385928351744
+    m_Key: txtVictory
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2836769894400
+    m_Key: txtCredits
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2901940989952
+    m_Key: txtCreditsContents
     m_Metadata:
       m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
-    rid: 2450747083678023708
+    rid: 2450747212316803072
   references:
     version: 2
     RefIds:
-    - rid: 2450747083678023708
+    - rid: 2450747212316803072
       type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables,
         asm: Unity.Localization}
       data:
-        m_CustomEpoch: 1713892671039
+        m_CustomEpoch: 1714380699623
