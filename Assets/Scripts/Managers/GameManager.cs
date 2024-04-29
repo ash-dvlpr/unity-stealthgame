@@ -18,7 +18,6 @@ public class GameManager : MonoBehaviourService<GameManager> {
     void Start() {
         MenuManager.Init();
         SceneManager.LoadScene(MAIN_MENU_SCENEID);
-        MenuManager.OpenMenu(MenuID.Main);
     }
 
     // ===================== Custom Code =====================
