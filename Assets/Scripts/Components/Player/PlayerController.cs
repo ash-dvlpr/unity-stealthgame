@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 using Cinemachine;
 
 using GameExtensions;
 using CinderUtils.Extensions;
-
 
 [RequireComponent(typeof(CharacterController), typeof(Animator), typeof(PlayerInputHandle))]
 public class PlayerController : BaseStateMachine<PlayerController.State> {
@@ -24,6 +24,7 @@ public class PlayerController : BaseStateMachine<PlayerController.State> {
     [field: Header("Cinemachine")]
     [field: SerializeField] public GameObject CameraRoot;
     [field: SerializeField] public CinemachineVirtualCamera VirtualCamera;
+    [field: SerializeField] public Volume PostProcessingVolume;
 
     // ======================= Context =======================
     public GameObject MainCamera { get; private set; }
@@ -45,11 +46,10 @@ public class PlayerController : BaseStateMachine<PlayerController.State> {
     bool IsCurrentDeviceMouse => PlayerInput.currentControlScheme == "KeyboardMouse";
 
     // Camera
-    CinemachineBasicMultiChannelPerlin cameraNoise;
     float _targetYaw;
     float _targetPitch;
-    //float _shakeTimer;
-    //float _shakeTotalTime;
+    CinemachineBasicMultiChannelPerlin _cameraNoise;
+    //Vignette _hitVignette;
 
     // Jumping
     float _groundCheckRadius = .28f;
@@ -80,8 +80,9 @@ public class PlayerController : BaseStateMachine<PlayerController.State> {
         PlayerInput = GetComponent<PlayerInput>();
         Input = GetComponent<PlayerInputHandle>();
         Animator = GetComponentInChildren<Animator>();
-        cameraNoise = VirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
-        
+
+        _cameraNoise = VirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+
         // Cache some configs
         _groundCheckRadius = CharacterController.radius;
         _groundMask = Config.GroundLayers;
@@ -114,7 +115,7 @@ public class PlayerController : BaseStateMachine<PlayerController.State> {
 
     protected override void LateUpdate() {
         UpdateCameraRotation();
-        UpdateCameraNoise();
+        UpdateCameraEffects();
         base.LateUpdate();
     }
 
@@ -154,7 +155,7 @@ public class PlayerController : BaseStateMachine<PlayerController.State> {
     }
 
     private void OnPlayerHit(AnimationEvent animationEvent) {
-        ShakePlayerCamera();
+        ShakePlayerCameraAndApplyVignette();
     }
 
     // ===================== Custom Code =====================
@@ -191,14 +192,16 @@ public class PlayerController : BaseStateMachine<PlayerController.State> {
         return Mathf.Clamp(angle, min, max);
     }
 
-    void UpdateCameraNoise() {
-        cameraNoise.m_AmplitudeGain -= Time.deltaTime;
+    void UpdateCameraEffects() {
+        _cameraNoise.m_AmplitudeGain -= Time.deltaTime;
 
-        cameraNoise.m_AmplitudeGain = Mathf.Clamp(cameraNoise.m_AmplitudeGain, 0, Config.MaxCameraShakeIntensity);
+        _cameraNoise.m_AmplitudeGain = Mathf.Clamp(_cameraNoise.m_AmplitudeGain, 0, Config.MaxCameraShakeIntensity);
+        PostProcessingVolume.weight = Mathf.Clamp(_cameraNoise.m_AmplitudeGain, 0f, 1f);
     }
 
-    void ShakePlayerCamera() {
-        cameraNoise.m_AmplitudeGain += Config.CameraShakeIntensity;
+    void ShakePlayerCameraAndApplyVignette() {
+        _cameraNoise.m_AmplitudeGain += Config.CameraShakeIntensity;
+        PostProcessingVolume.weight = 1.0f;
     }
 
     void UpdateSensors() {

@@ -2785,6 +2785,11 @@ PrefabInstance:
       propertyPath: VirtualCamera
       value: 
       objectReference: {fileID: 364279444}
+    - target: {fileID: 2503516371874899795, guid: 038e13161b2de9d4c883f1ef0277baae,
+        type: 3}
+      propertyPath: PostProcessingVolume
+      value: 
+      objectReference: {fileID: 1197437851}
     - target: {fileID: 2625385629174570460, guid: 038e13161b2de9d4c883f1ef0277baae,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3887,10 +3892,10 @@ MonoBehaviour:
   m_RendererIndex: -1
   m_VolumeLayerMask:
     serializedVersion: 2
-    m_Bits: 1
-  m_VolumeTrigger: {fileID: 0}
+    m_Bits: 4096
+  m_VolumeTrigger: {fileID: 823080718}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -5327,6 +5332,55 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1165356396}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1197437848
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1197437849}
+  - component: {fileID: 1197437851}
+  m_Layer: 12
+  m_Name: DamageViggneteVolume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1197437849
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197437848}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1197437851
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197437848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 0
+  sharedProfile: {fileID: 11400000, guid: 314f1d1786dcb1d43953458a58fb90ba, type: 2}
 --- !u!1 &1207824200 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 712978050524689081, guid: a959ffe749766144398430b64035170d,
@@ -9845,6 +9899,7 @@ SceneRoots:
   - {fileID: 349793913}
   - {fileID: 417812084}
   - {fileID: 835576103}
+  - {fileID: 1197437849}
   - {fileID: 823080718}
   - {fileID: 1402827283}
   - {fileID: 506698536}

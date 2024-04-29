@@ -57,7 +57,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.074927956
+      - time: 0.1354467
         functionName: OnPlayerHit
         data: 
         objectReferenceParameter: {instanceID: 0}

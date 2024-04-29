@@ -44,7 +44,6 @@ public class Player : MonoBehaviour {
     }
 
     void OnHit() {
-        Debug.Log("Hit");
         Animator.SetTrigger(AnimatorID.Hit);
     }
 }
