@@ -24,7 +24,7 @@ public class Health : Resource {
     protected override void TriggerOnChange(float prev, float next) {
         base.TriggerOnChange(prev, next);
 
-        if (prev < next) OnHit?.Invoke();
+        if (prev > next) OnHit?.Invoke();
         if (next.Equals(0)) OnDeath?.Invoke();
     }
 }

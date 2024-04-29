@@ -1,11 +1,13 @@
-using CinderUtils.Extensions;
-using GameExtensions;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.XR;
+using Cinemachine;
+
+using GameExtensions;
+using CinderUtils.Extensions;
 
 
 [RequireComponent(typeof(CharacterController), typeof(Animator), typeof(PlayerInputHandle))]
@@ -14,7 +16,6 @@ public class PlayerController : BaseStateMachine<PlayerController.State> {
         IDLE     = 0, // default
         MOVING   = 1,
         JUMPING  = 2,
-        //SWIMMING = 3,
     }
 
     // ==================== Configuration ====================
@@ -22,6 +23,7 @@ public class PlayerController : BaseStateMachine<PlayerController.State> {
 
     [field: Header("Cinemachine")]
     [field: SerializeField] public GameObject CameraRoot;
+    [field: SerializeField] public CinemachineVirtualCamera VirtualCamera;
 
     // ======================= Context =======================
     public GameObject MainCamera { get; private set; }
@@ -43,8 +45,11 @@ public class PlayerController : BaseStateMachine<PlayerController.State> {
     bool IsCurrentDeviceMouse => PlayerInput.currentControlScheme == "KeyboardMouse";
 
     // Camera
+    CinemachineBasicMultiChannelPerlin cameraNoise;
     float _targetYaw;
     float _targetPitch;
+    //float _shakeTimer;
+    //float _shakeTotalTime;
 
     // Jumping
     float _groundCheckRadius = .28f;
@@ -75,7 +80,8 @@ public class PlayerController : BaseStateMachine<PlayerController.State> {
         PlayerInput = GetComponent<PlayerInput>();
         Input = GetComponent<PlayerInputHandle>();
         Animator = GetComponentInChildren<Animator>();
-
+        cameraNoise = VirtualCamera.GetCinemachineComponent<CinemachineBasicMultiChannelPerlin>();
+        
         // Cache some configs
         _groundCheckRadius = CharacterController.radius;
         _groundMask = Config.GroundLayers;
@@ -108,6 +114,7 @@ public class PlayerController : BaseStateMachine<PlayerController.State> {
 
     protected override void LateUpdate() {
         UpdateCameraRotation();
+        UpdateCameraNoise();
         base.LateUpdate();
     }
 
@@ -146,6 +153,10 @@ public class PlayerController : BaseStateMachine<PlayerController.State> {
         }
     }
 
+    private void OnPlayerHit(AnimationEvent animationEvent) {
+        ShakePlayerCamera();
+    }
+
     // ===================== Custom Code =====================
     protected override void InitializeStates() {
         states[State.IDLE] = new PlayerControllerState_Idle(this);
@@ -178,6 +189,16 @@ public class PlayerController : BaseStateMachine<PlayerController.State> {
         if (angle < -360f) angle += 360f;
         if (angle > 360f) angle -= 360f;
         return Mathf.Clamp(angle, min, max);
+    }
+
+    void UpdateCameraNoise() {
+        cameraNoise.m_AmplitudeGain -= Time.deltaTime;
+
+        cameraNoise.m_AmplitudeGain = Mathf.Clamp(cameraNoise.m_AmplitudeGain, 0, Config.MaxCameraShakeIntensity);
+    }
+
+    void ShakePlayerCamera() {
+        cameraNoise.m_AmplitudeGain += Config.CameraShakeIntensity;
     }
 
     void UpdateSensors() {

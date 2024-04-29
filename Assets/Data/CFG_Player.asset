@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   UpperVerticalLimit: 70
   LowerVerticalLimit: -30
+  CameraShakeIntensity: 0.7
+  MaxCameraShakeIntensity: 1.5
   <WalkSpeed>k__BackingField: 2
   <RunSpeed>k__BackingField: 5.335
   <WetSpeedModifier>k__BackingField: 0.7

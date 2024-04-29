@@ -26,6 +26,8 @@ public class PlayerConfig : ScriptableObject {
     [field: SerializeField, Range( 10,  90)] public float UpperVerticalLimit = 70.0f;
     [field: Tooltip("How far in degrees can you move the camera down")]
     [field: SerializeField, Range(-90, -10)] public float LowerVerticalLimit = -30.0f;
+    [field: SerializeField, Min(0)] public float CameraShakeIntensity = 1f;
+    [field: SerializeField, Min(0)] public float MaxCameraShakeIntensity = 2f;
 
     [field: Header("Movement")]
     [field: Tooltip("Move speed of the character in m/s")]

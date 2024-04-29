@@ -47,7 +47,6 @@ public class EnemyAIState_Attack : EnemyAIState {
         foreach (Collider hit in hittedTargets) {
             if (hit.TryGetComponent<Health>(out var health)) {
                 health.Damage(Config.AttackDPS);
-                Debug.Log($"Hit: {health.name}");
             }
         }
     }
