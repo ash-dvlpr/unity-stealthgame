@@ -207,6 +207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   targetTag: Player
+  collectionSound: {fileID: 8300000, guid: 793d8bbb9b8ab164ba4a84bf47133cd3, type: 3}
 --- !u!1 &4594058519164441806
 GameObject:
   m_ObjectHideFlags: 0

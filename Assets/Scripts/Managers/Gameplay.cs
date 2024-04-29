@@ -67,7 +67,7 @@ public class Gameplay : MonoBehaviour {
     int DetectionCount { 
         get => _detectionCount;
         set {
-            GUI.UpdateBackgroundMusic(value != 0);
+            if (gameState != State.GAME_ENDED) GUI.UpdateBackgroundMusic(value != 0);
             _detectionCount = value;
         }
     }

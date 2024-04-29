@@ -70,7 +70,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 0
   targetTag: Player
-  healthAmount: 10
+  collectionSound: {fileID: 8300000, guid: 4b0b3729fb9e3ab419f8e61a927be904, type: 3}
+  healthAmount: 20
 --- !u!1 &7194593048788498349
 GameObject:
   m_ObjectHideFlags: 0

@@ -35,10 +35,10 @@ RenderSettings:
   m_DefaultReflectionMode: 0
   m_DefaultReflectionResolution: 128
   m_ReflectionBounces: 1
-  m_ReflectionIntensity: 0.3
+  m_ReflectionIntensity: 0.5
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.035214633, g: 0.019764878, b: 0.003031985, a: 0.3}
+  m_IndirectSpecularColor: {r: 0.08903269, g: 0.17223106, b: 0.17075983, a: 0.5}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2404,7 +2404,7 @@ MonoBehaviour:
       spatialBlend: 0
   - purpose: 3
     clip: {fileID: 8300000, guid: 4b0b3729fb9e3ab419f8e61a927be904, type: 3}
-    volume: 0.15
+    volume: 0.17
     advanced:
       loop: 0
       spatialBlend: 1

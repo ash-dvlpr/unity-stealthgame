@@ -35,10 +35,10 @@ RenderSettings:
   m_DefaultReflectionMode: 0
   m_DefaultReflectionResolution: 128
   m_ReflectionBounces: 1
-  m_ReflectionIntensity: 0.3
+  m_ReflectionIntensity: 0.5
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 735553542}
-  m_IndirectSpecularColor: {r: 0.053419616, g: 0.103338644, b: 0.1024559, a: 0.3}
+  m_IndirectSpecularColor: {r: 0.08903269, g: 0.17223106, b: 0.17075983, a: 0.5}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3302,7 +3302,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Config>k__BackingField: {fileID: 11400000, guid: 133713542fca26441844b82099f2b077,
     type: 2}
-  startingMinute: 4
+  startingMinute: 1
   timeSpeed: 1
   sunLight: {fileID: 735553542}
   moonLight: {fileID: 2123974742}
