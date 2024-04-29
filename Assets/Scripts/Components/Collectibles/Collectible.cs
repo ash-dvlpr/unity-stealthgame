@@ -10,6 +10,9 @@ public abstract class Collectible : EventRaiser {
     [Header("Collision")]
     [SerializeField] string targetTag = "Player";
 
+    [Header("Sounds")]
+    [SerializeField] AudioClip collectionSound;
+
     // ===================== Unity Stuff =====================
     void OnTriggerEnter(Collider other) {
         if (other.CompareTag(targetTag)) {
@@ -19,8 +22,12 @@ public abstract class Collectible : EventRaiser {
     }
 
     // ===================== Custom Code =====================
-    protected abstract void Collect(Collider other);
-    protected virtual void Despawn() { 
+    protected virtual void Collect(Collider other) {
+        if (collectionSound) {
+            AudioManager.PlayClipAt(collectionSound, transform.position);
+        }
+    }
+    protected virtual void Despawn() {
         Destroy(this.gameObject);
     }
 }
@@ -41,5 +48,6 @@ public abstract class Collectible<R> : Collectible, ICollectible<R> where R : Re
         EventBus.Raise<CollectibleEvent>(new() {
             collectible = this
         });
+        base.Collect(other);
     }
 }

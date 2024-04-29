@@ -44,7 +44,7 @@ public class ResourceBar : MonoBehaviour {
     }
 
     // ===================== Custom Code =====================
-    void OnResourceChanged(Resource resource) => UpdateGUI();
+    void OnResourceChanged(float prev, float next) => UpdateGUI();
     void ReloadBar() {
         if (displayText) displayText.enabled = showValues;
 

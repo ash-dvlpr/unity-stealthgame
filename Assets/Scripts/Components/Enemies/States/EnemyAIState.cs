@@ -59,7 +59,7 @@ public abstract class EnemyAIState : BaseState<EnemyAI.EState> {
 
             // Sensing
             Context.FOV.Range = StateConfig.ViewRange;
-            //Context.FOV.ViewAngle = StateConfig.ViewAngle;
+            Context.FOV.ViewAngle = StateConfig.ViewAngle;
             Context.FOV.DetectionMode = StateConfig.DetectionMode;
         }
     }

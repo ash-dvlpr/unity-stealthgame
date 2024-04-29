@@ -2,6 +2,8 @@ using System;
 using UnityEngine;
 using UnityEngine.AI;
 
+using CinderUtils.Events;
+
 
 [RequireComponent(typeof(NavMeshAgent), typeof(FieldOfView))]
 public class EnemyAI : BaseStateMachine<EnemyAI.EState> {
@@ -22,12 +24,16 @@ public class EnemyAI : BaseStateMachine<EnemyAI.EState> {
     public NavMeshAgent Agent { get; private set; }
     public FieldOfView FOV { get; private set; }
 
+    // ====================== Variables ======================
+    public bool _notified;
+
     // ===================== Unity Stuff =====================
     protected override void Awake() {
         Agent = GetComponent<NavMeshAgent>();
         FOV = GetComponent<FieldOfView>();
         Animator = GetComponentInChildren<Animator>();
 
+        FOV.filter = FOVFilter;
         base.Awake();
     }
 
@@ -45,5 +51,22 @@ public class EnemyAI : BaseStateMachine<EnemyAI.EState> {
     public void SwapPatrol(AIPatrol newPatrol) { 
         Patrol = newPatrol;
         OnPatrolChanged?.Invoke();
+    }
+
+    public void NotifyPlayerDetected() {
+        if (!_notified) {
+            _notified = true;
+            EventBus.Raise<GameplayEvent>(new() { data = EventMetadata.PLAYER_DETECTED });    
+        }
+    }
+    public void NotifyPlayerLost() { 
+        if (_notified) { 
+            _notified = false;
+            EventBus.Raise<GameplayEvent>(new() { data = EventMetadata.PLAYER_LOST });    
+        }
+    }
+
+    public bool FOVFilter(GameObject go) {
+        return go.TryGetComponent<Health>(out var hp) && hp.IsAlive;
     }
 }

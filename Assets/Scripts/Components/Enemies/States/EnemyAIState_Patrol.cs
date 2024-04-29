@@ -18,6 +18,8 @@ public class EnemyAIState_Patrol : EnemyAIState {
         
         RestartSequence();
         CyclePatrol();
+
+        Context.NotifyPlayerLost();
     }
     public override void Exit() {
         CurrentTarget = Context.transform;

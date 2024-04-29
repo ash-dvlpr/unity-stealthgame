@@ -20,11 +20,11 @@ public class Health : Resource {
 
     // ================== Outside Facing API =================
     public event Action OnDeath;
+    public event Action OnHit;
     protected override void TriggerOnChange(float prev, float next) {
         base.TriggerOnChange(prev, next);
 
-        if (Amount.Equals(0)) {
-            OnDeath?.Invoke();
-        }
+        if (prev < next) OnHit?.Invoke();
+        if (next.Equals(0)) OnDeath?.Invoke();
     }
 }

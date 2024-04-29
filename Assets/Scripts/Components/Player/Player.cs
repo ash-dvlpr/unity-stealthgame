@@ -26,12 +26,12 @@ public class Player : MonoBehaviour {
     }
 
     void OnEnable() {
-        HP.OnChange += OnHit;
+        HP.OnHit += OnHit;
         EventBus.Register(collectibleEvents);
     }
 
     void OnDisable() {
-        HP.OnChange -= OnHit;
+        HP.OnHit -= OnHit;
         EventBus.Deregister(collectibleEvents);
     }
 
@@ -43,7 +43,7 @@ public class Player : MonoBehaviour {
         }
     }
 
-    void OnHit(Resource health) {
+    void OnHit() {
         Animator.SetTrigger(AnimatorID.Hit);
     }
 }

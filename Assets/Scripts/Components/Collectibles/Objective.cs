@@ -14,5 +14,6 @@ public class Objective : Collectible {
     // ===================== Custom Code =====================
     protected override void Collect(Collider other) {
         EventBus.Raise<GameplayEvent>(new() { id = ID, data = EventMetadata.OBJECTIVE_COMPLETED });
+        base.Collect(other);
     }
 }

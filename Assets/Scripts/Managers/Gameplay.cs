@@ -43,6 +43,7 @@ public class Gameplay : MonoBehaviour {
 
     HashSet<int> objectiveIds = new();
     int _remainingObjectives = 0;
+    int _detectionCount = 0;
 
     List<AIPatrol> enemyPatrols = new();
     int patrolOffset = 0;
@@ -61,6 +62,13 @@ public class Gameplay : MonoBehaviour {
         set {
             GUI.UpdateRemainingIbjectives(value);
             _remainingObjectives = value;
+        }
+    }
+    int DetectionCount { 
+        get => _detectionCount;
+        set {
+            GUI.UpdateBackgroundMusic(value != 0);
+            _detectionCount = value;
         }
     }
 
@@ -125,6 +133,7 @@ public class Gameplay : MonoBehaviour {
         playerInput = player.PlayerController.PlayerInput;
         gameState = State.NONE;
         RemainingObjectives = TotalObjectives;
+        DetectionCount = 0;
 
         // Start stuff
         gameState = State.GAME_STARTED;
@@ -156,6 +165,16 @@ public class Gameplay : MonoBehaviour {
                 break;
             }
 
+            // Track how many enemies have detected the player
+            case EventMetadata.PLAYER_DETECTED: {
+                DetectionCount++;
+                break;
+            }
+            case EventMetadata.PLAYER_LOST: {
+                DetectionCount--;
+                break;
+            }
+
             default: break;
         }
     }
@@ -171,16 +190,18 @@ public class Gameplay : MonoBehaviour {
         // Trigger win fireworks
         EventBus.Raise<CinematicEvent>(new() { id = CinematicID.VICTORY });
 
-        gameOverUI.GameOverText(false);
+        gameOverUI.GameOverText(true);
         MenuManager.OpenMenu(MenuID.GameOverUI);
+        gameOverUI.UpdateBackgroundMusic(true);
     }
 
     void TriggerDefeat() {
         gameState = State.GAME_ENDED;
         playerInput.enabled = false;
 
-        gameOverUI.GameOverText(true);
+        gameOverUI.GameOverText(false);
         MenuManager.OpenMenu(MenuID.GameOverUI);
+        gameOverUI.UpdateBackgroundMusic(false, remainingTime.TimesUp);
     }
 
     void SpawnHeathPack() {

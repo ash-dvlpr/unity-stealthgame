@@ -13,6 +13,8 @@ public enum EventMetadata : byte {
     NONE                = 0,
     OBJECTIVE_SETUP     = 1,
     OBJECTIVE_COMPLETED = 2,
+    PLAYER_DETECTED     = 3,
+    PLAYER_LOST         = 4,
 }
 
 

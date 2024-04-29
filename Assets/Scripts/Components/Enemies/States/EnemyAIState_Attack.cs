@@ -16,6 +16,8 @@ public class EnemyAIState_Attack : EnemyAIState {
 
         ResetTimer();
         Context.Animator.SetBool("IsAttacking", true);
+
+        Context.NotifyPlayerDetected();
     }
 
     public override void Exit() {
@@ -52,8 +54,11 @@ public class EnemyAIState_Attack : EnemyAIState {
 
     public override EnemyAI.EState NextState() {
         // If not on attack animation
-        if (timer <= 0f) { 
-            // TODO: If target dies, PATROL
+        if (timer <= 0f) {
+            // Target dies, PATROL
+            if (!Context.FOV.VisibleTargets.Contains(CurrentTarget)) {
+                return EnemyAI.EState.PATROL;
+            }
 
             // Distance becomes too great, return to chasing
             if (DistanceToTarget > StateConfig.StoppingDistance) {

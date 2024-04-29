@@ -68,10 +68,11 @@ public abstract class Resource : MonoBehaviour {
     }
 
     // ================== Outside Facing API =================
-    public event Action<Resource> OnChange;
+    public event Action<float, float> OnChange;
     protected virtual void TriggerOnChange(float prev, float next) { 
-        OnChange?.Invoke(this);
+        OnChange?.Invoke(prev, next);
     }
+
 
     public void ResetValues() {
         Reset();

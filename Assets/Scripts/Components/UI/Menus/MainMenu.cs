@@ -8,14 +8,14 @@ public class MainMenu : AMenu {
     public override MenuID MenuKey { get => MenuID.Main; }
 
     // ==================== Configuration ====================
-    //[SerializeField] AudioClip mainTheme;
+    [SerializeField] AudioClip mainTheme;
 
     // ====================== References =====================
 
     // ===================== Custom Code =====================
     public override void OpenMenu() {
         base.OpenMenu();
-        //AudioManager.PlayClip(mainTheme, false);
+        AudioManager.PlayClip(mainTheme, false);
     }
     public override void CloseMenu() {
         base.CloseMenu();

@@ -14,19 +14,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   configs:
   - State: 1
-    WalkSpeed: 2
+    WalkSpeed: 3
     StoppingDistance: 0
     DetectionMode: 0
-    ViewRange: 8
+    ViewAngle: 150
+    ViewRange: 10
   - State: 2
-    WalkSpeed: 4
+    WalkSpeed: 4.5
     StoppingDistance: 2
     DetectionMode: 2
-    ViewRange: 8
+    ViewAngle: 150
+    ViewRange: 15
   - State: 3
     WalkSpeed: 0
     StoppingDistance: 5
     DetectionMode: 2
-    ViewRange: 8
+    ViewAngle: 150
+    ViewRange: 15
   <AttackDelay>k__BackingField: 1
   <AttackDamage>k__BackingField: 3

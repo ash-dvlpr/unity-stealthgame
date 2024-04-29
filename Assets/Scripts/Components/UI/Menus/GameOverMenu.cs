@@ -9,6 +9,11 @@ using UnityEngine.SceneManagement;
 public class GameOverMenu : AMenu {
     public override MenuID MenuKey { get => MenuID.GameOverUI; }
 
+    // ==================== Configuration ====================
+    [SerializeField] AudioClip winSound;
+    [SerializeField] AudioClip deathSound;
+    [SerializeField] AudioClip timeoutSound;
+
     // ====================== References =====================
     [SerializeField] GameObject victoryText;
     [SerializeField] GameObject gameOverText;
@@ -23,9 +28,15 @@ public class GameOverMenu : AMenu {
         base.CloseMenu();
     }
 
-    public void GameOverText(bool gameOver) {
-        gameOverText?.SetActive(gameOver);
-        victoryText?.SetActive(!gameOver);
+    public void GameOverText(bool victory) {
+        victoryText?.SetActive(victory);
+        gameOverText?.SetActive(!victory);
+    }
+
+    public void UpdateBackgroundMusic(bool win, bool timeout = false) { 
+        var clip = win ? winSound 
+            : timeout ? timeoutSound : deathSound;
+        AudioManager.PlayClip(clip, true);
     }
 
     // ===================== UI Actions ======================

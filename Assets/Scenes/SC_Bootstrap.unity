@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 0.3
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.053419616, g: 0.103338644, b: 0.1024559, a: 0.3}
+  m_IndirectSpecularColor: {r: 0.035214633, g: 0.019764878, b: 0.003031985, a: 0.3}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1988,6 +1988,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstSelected: {fileID: 0}
+  mainTheme: {fileID: 8300000, guid: 9d667947875b1414ba7b7e31c34ce329, type: 3}
 --- !u!1 &635511899
 GameObject:
   m_ObjectHideFlags: 0
@@ -2338,6 +2339,117 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!1 &755356555
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 755356556}
+  - component: {fileID: 755356557}
+  m_Layer: 0
+  m_Name: AudioManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &755356556
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755356555}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &755356557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 755356555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4bd98e7c91b17342808f7f8817cce39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  audioClipConfigs:
+  - purpose: 1
+    clip: {fileID: 8300000, guid: 9d667947875b1414ba7b7e31c34ce329, type: 3}
+    volume: 0.15
+    advanced:
+      loop: 1
+      spatialBlend: 0
+  - purpose: 1
+    clip: {fileID: 8300000, guid: a04977cf637bfb24d8b0bca2aa1eff31, type: 3}
+    volume: 0.15
+    advanced:
+      loop: 1
+      spatialBlend: 0
+  - purpose: 1
+    clip: {fileID: 8300000, guid: 80820298896bdb54786940db42baf890, type: 3}
+    volume: 0.15
+    advanced:
+      loop: 1
+      spatialBlend: 0
+  - purpose: 3
+    clip: {fileID: 8300000, guid: 4b0b3729fb9e3ab419f8e61a927be904, type: 3}
+    volume: 0.15
+    advanced:
+      loop: 0
+      spatialBlend: 1
+  - purpose: 3
+    clip: {fileID: 8300000, guid: c96f3e5d527f4b74f9301a8a89640a0e, type: 3}
+    volume: 0.15
+    advanced:
+      loop: 0
+      spatialBlend: 1
+  - purpose: 3
+    clip: {fileID: 8300000, guid: 0dd55b11308962a4e8ebcb1a217bb4ae, type: 3}
+    volume: 0.15
+    advanced:
+      loop: 0
+      spatialBlend: 1
+  - purpose: 3
+    clip: {fileID: 8300000, guid: 793d8bbb9b8ab164ba4a84bf47133cd3, type: 3}
+    volume: 0.15
+    advanced:
+      loop: 0
+      spatialBlend: 1
+  - purpose: 3
+    clip: {fileID: 8300000, guid: 826057967c381a544a19618b146f03b9, type: 3}
+    volume: 0.15
+    advanced:
+      loop: 0
+      spatialBlend: 1
+  - purpose: 1
+    clip: {fileID: 8300000, guid: ccccce0e5be572b4bad5fb1cce652ff6, type: 3}
+    volume: 0.15
+    advanced:
+      loop: 0
+      spatialBlend: 0
+  - purpose: 1
+    clip: {fileID: 8300000, guid: f74635a00e48983469b4372cbc62b913, type: 3}
+    volume: 0.15
+    advanced:
+      loop: 0
+      spatialBlend: 0
+  - purpose: 1
+    clip: {fileID: 8300000, guid: 98b437b710af10d4d8d6b5ec775313a3, type: 3}
+    volume: 0.15
+    advanced:
+      loop: 0
+      spatialBlend: 0
 --- !u!1 &779471094
 GameObject:
   m_ObjectHideFlags: 0
@@ -5025,6 +5137,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstSelected: {fileID: 814059016}
+  winSound: {fileID: 8300000, guid: 98b437b710af10d4d8d6b5ec775313a3, type: 3}
+  deathSound: {fileID: 8300000, guid: ccccce0e5be572b4bad5fb1cce652ff6, type: 3}
+  timeoutSound: {fileID: 8300000, guid: f74635a00e48983469b4372cbc62b913, type: 3}
   victoryText: {fileID: 1921499457}
   gameOverText: {fileID: 826145790}
 --- !u!1 &2106509738
@@ -5146,6 +5261,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstSelected: {fileID: 0}
+  gameTheme: {fileID: 8300000, guid: a04977cf637bfb24d8b0bca2aa1eff31, type: 3}
+  pursuitTheme: {fileID: 8300000, guid: 80820298896bdb54786940db42baf890, type: 3}
   <HPBar>k__BackingField: {fileID: 1750969502}
   <TimeBar>k__BackingField: {fileID: 1956478243}
   <RemainingObjectivesDisplay>k__BackingField: {fileID: 399619355}
@@ -5154,4 +5271,5 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 14828902}
+  - {fileID: 755356556}
   - {fileID: 193426819}

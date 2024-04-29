@@ -17,16 +17,19 @@ MonoBehaviour:
     WalkSpeed: 2
     StoppingDistance: 0
     DetectionMode: 0
-    ViewRange: 8
+    ViewAngle: 215
+    ViewRange: 6
   - State: 2
     WalkSpeed: 4
     StoppingDistance: 2
     DetectionMode: 2
+    ViewAngle: 215
     ViewRange: 8
   - State: 3
     WalkSpeed: 0
     StoppingDistance: 5
     DetectionMode: 2
-    ViewRange: 8
+    ViewAngle: 215
+    ViewRange: 10
   <AttackDelay>k__BackingField: 1
-  <AttackDamage>k__BackingField: 3
+  <AttackDamage>k__BackingField: 5

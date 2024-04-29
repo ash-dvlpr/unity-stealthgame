@@ -14,7 +14,7 @@ public class AIConfig : ScriptableObject {
         [SerializeField, Min(1)] public float StoppingDistance;
         [Header("Senses")]
         [SerializeField] public FieldOfView.EDetectionMode DetectionMode;
-        //[SerializeField, Range(0, 360)] public float ViewAngle;
+        [SerializeField, Range(0, 360)] public float ViewAngle;
         [SerializeField, Min(0)] public float ViewRange;
 
         public override string ToString() {

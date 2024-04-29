@@ -26,6 +26,7 @@ public class FieldOfView : MonoBehaviour {
     // ====================== Variables ======================
     public bool SeenAny => !VisibleTargets.NullOrEmpty();
     public readonly List<Transform> VisibleTargets = new();
+    public Func<GameObject, bool> filter = (_) => true;
 
     public Collider[] TargetsInPresenceRange { get; private set; }
     public Collider[] TargetsInRange { get; private set; }
@@ -62,12 +63,14 @@ public class FieldOfView : MonoBehaviour {
             Transform target = targetCollider.transform;
 
             // If it's on the presence range, add it to the list.
-            if (TargetsInPresenceRange.Contains(targetCollider)) {
-                VisibleTargets.Add(target);
-            }
-            // If it's visible, add it to the list.
-            else if (TargetIsVisible(targetCollider.bounds.center)) {
-                VisibleTargets.Add(target);
+            if (filter(targetCollider.gameObject)) { 
+                if (TargetsInPresenceRange.Contains(targetCollider)) {
+                    VisibleTargets.Add(target);
+                }
+                // If it's visible, add it to the list.
+                else if (TargetIsVisible(targetCollider.bounds.center)) {
+                    VisibleTargets.Add(target);
+                }
             }
         }
     }
